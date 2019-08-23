@@ -31,7 +31,6 @@ def generate_data():
     p = Pool(10)
     result = p.map(calculate, seeds)
 
-    print(result)
     results = {x: 0 for x in range(1,23)}
 
     for seed in result:
@@ -51,7 +50,7 @@ def generate_graph():
         json.dump(data, dataset)
 
     means = [x for x in data.values()]
-    plt.plot([x for x in range(len(means))], means)
+    plt.semilogy([x for x in range(len(means))], means)
     plt.title('Average tries per challenge difficulty')
     plt.xlabel('Difficulty')
     plt.ylabel('Tries')
