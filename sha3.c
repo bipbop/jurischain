@@ -22,6 +22,9 @@ typedef struct {
     int pt, rsiz, mdlen;                    // these don't overflow
 } sha3_ctx_t;
 
+// global rand num
+uint8_t rand_hash[32];
+
 // Compression function
 void sha3_keccakf(uint64_t st[25]);
 
@@ -409,6 +412,33 @@ void test_speed()
 
 }
 
+// pow_genrand
+uint8_t *pow_genrand() {
+    make_sha3(rand_hash, rand_hash, 32);
+    return rand_hash;
+}
+
+// pow_initrand
+uint8_t *pow_initrand(const char* seed) {
+    make_sha3(seed, rand_hash, 32);
+    return rand_hash;
+}
+
+// pow_gen
+uint8_t *pow_gen(uint8_t d, uint8_t *challenge) {
+    pow_genrand();
+    
+    for(int i=0; i < 32; i++)  challenge[i] = rand_hash[i];
+    challenge[33] = d;
+
+    return challenge;    
+}
+
+// pow_try
+// pow_verify
+
+
+
 
 // main
 int main(int argc, char **argv) {
@@ -416,13 +446,36 @@ int main(int argc, char **argv) {
         printf("FIPS 202 / SHA3, SHAKE128, SHAKE256 Self-Tests OK!\n");
     test_speed();*/
 
-    size_t len = (atoi(argv[2]) >= 512) ? 512 : atoi(argv[2]);
+    //size_t len = (atoi(argv[2]) >= 32) ? 32 : atoi(argv[2]);
+    size_t len = 32;
 
-    char hash[512];
+    uint8_t hash[32];
+    uint8_t challenge[33];
+
+
     make_sha3(argv[1], hash, len);
-    
+
+    pow_initrand(argv[2]);
     printf("SHA3-%lu:\n", len);
-    for(int i=0; i < len; i++) printf("%X", hash[i]);
+    for(int i=0; i < len; i++) printf("%02X", rand_hash[i]);
+    printf("\n"); 
+    pow_genrand();   
+
+    printf("SHA3-%lu:\n", len);
+    for(int i=0; i < len; i++) printf("%02X", rand_hash[i]);
+    printf("\n");    
+    pow_genrand();
+
+    make_sha3(argv[2], hash, len);
+    printf("SHA3-%lu:\n", len);
+    for(int i=0; i < len; i++) printf("%02X", hash[i]);
+    printf("\n"); 
+
+    pow_gen(100, challenge);
+    printf("[CHALLENGE] SHA3-%lu:\n", len);
+    for(int i=0; i < len; i++) printf("%02X", challenge[i]);
+    printf("\nDificuldade: %d", challenge[33]);
+    printf("\n");
 
     return 0;
 }
