@@ -226,14 +226,6 @@ void shake_out(sha3_ctx_t *c, void *out, size_t len)
     c->pt = j;
 }
 
-/* API */
-void make_sha3(const char* msg, char* buffer, size_t hash_len) {
-    sha3(msg, strlen(msg), buffer, hash_len);
-}
-
-static int check_sha3(uint8_t* msg, uint8_t* hash) {
-    return 0;
-} 
 
 /* TESTS */
 // read a hex string, return byte length or -1 on error.
@@ -415,13 +407,13 @@ void test_speed()
 
 // pow_genrand
 uint8_t *pow_genrand() {
-    make_sha3(rand_hash, rand_hash, 32);
+    sha3(rand_hash, 32, rand_hash, 32);
     return rand_hash;
 }
 
 // pow_initrand
 uint8_t *pow_initrand(const char* seed) {
-    make_sha3(seed, rand_hash, 32);
+    sha3(seed, strlen(seed), rand_hash, 32);
     return rand_hash;
 }
 
@@ -443,11 +435,17 @@ int pow_verify(uint8_t *challenge, uint8_t *answer) {
     for(int i=32; i < 64; i++) hash_concat[i] = answer[i-32];
     d = challenge[32];
     
-    make_sha3(hash_concat, response, 32);
+    sha3(hash_concat, 64, response, 32);
     
     // checar se os primeiros bits estão corretos
-    
+    uint64_t mask = 0xFFFFFFFFFFFFFFFF >> (64 - (d % 64));
+    uint64_t* res64 = (uint64_t *) response;  // webassembly assumes little endian
+    int valid = 1;
 
+    for (int i = 0; i < (d/64); i++) valid = (res64[i] == 0) ? valid : 0;
+    if ((d % 64) != 0) valid = ((res64[d/64] & mask) == 0) ? valid : 0;
+
+    return valid;
 }
 
 // pow_try
@@ -473,14 +471,17 @@ int main(int argc, char **argv) {
         printf("FIPS 202 / SHA3, SHAKE128, SHAKE256 Self-Tests OK!\n");
     test_speed();*/
 
-    //size_t len = (atoi(argv[2]) >= 32) ? 32 : atoi(argv[2]);
     size_t len = 32;
 
     uint8_t hash[32];
     uint8_t challenge[33];
 
+    if (argc < 2) {
+        printf("usage: %s <message> <seed>", argv[0]);
+        return 0;
+    }
 
-    make_sha3(argv[1], hash, len);
+    sha3(argv[1], strlen(argv[1]), hash, len);
 
     pow_initrand(argv[2]);
     printf("SHA3-%lu:\n", len);
@@ -493,7 +494,7 @@ int main(int argc, char **argv) {
     printf("\n");    
     pow_genrand();
 
-    make_sha3(argv[1], hash, len);
+    sha3(argv[1], strlen(argv[1]), hash, len);
     printf("SHA3-%lu:\n", len);
     for(int i=0; i < len; i++) printf("%02X", hash[i]);
     printf("\n"); 
