@@ -421,7 +421,8 @@ uint8_t *pow_initrand(const char* seed) {
 uint8_t *pow_gen(uint8_t d, uint8_t *challenge) {
     pow_genrand();
     
-    for(int i=0; i < 32; i++)  challenge[i] = rand_hash[i]; // substituir por memcpy
+    memcpy(challenge, rand_hash, 32);
+    
     challenge[32] = d;
 
     return challenge;    
