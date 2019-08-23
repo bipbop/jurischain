@@ -428,14 +428,28 @@ uint8_t *pow_initrand(const char* seed) {
 uint8_t *pow_gen(uint8_t d, uint8_t *challenge) {
     pow_genrand();
     
-    for(int i=0; i < 32; i++)  challenge[i] = rand_hash[i];
-    challenge[33] = d;
+    for(int i=0; i < 32; i++)  challenge[i] = rand_hash[i]; // substituir por memcpy
+    challenge[32] = d;
 
     return challenge;    
 }
 
 // pow_try
 // pow_verify
+int pow_verify(uint8_t *challenge, uint8_t *answer) {
+    uint8_t hash[32], d, hash_concat[64], response[32];
+
+    for(int i=0; i < 32; i++) hash[i] = hash_concat[i] = challenge[i];
+    for(int i=32; i < 64; i++) hash_concat[i] = answer[i-32];
+    d = challenge[32];
+    
+    make_sha3(hash_concat, response, 32);
+    
+    // checar se os primeiros bits estão corretos
+
+    
+
+}
 
 
 
@@ -466,7 +480,7 @@ int main(int argc, char **argv) {
     printf("\n");    
     pow_genrand();
 
-    make_sha3(argv[2], hash, len);
+    make_sha3(argv[1], hash, len);
     printf("SHA3-%lu:\n", len);
     for(int i=0; i < len; i++) printf("%02X", hash[i]);
     printf("\n"); 
@@ -474,7 +488,7 @@ int main(int argc, char **argv) {
     pow_gen(100, challenge);
     printf("[CHALLENGE] SHA3-%lu:\n", len);
     for(int i=0; i < len; i++) printf("%02X", challenge[i]);
-    printf("\nDificuldade: %d", challenge[33]);
+    printf("\nDificuldade: %d", challenge[32]);
     printf("\n");
 
     return 0;
