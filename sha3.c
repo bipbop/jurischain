@@ -3,6 +3,7 @@
 #include <string.h>
 #include <time.h>
 #include <stddef.h>
+#include <string.h>
 #include <stdint.h>
 
 #ifndef KECCAKF_ROUNDS
@@ -434,7 +435,6 @@ uint8_t *pow_gen(uint8_t d, uint8_t *challenge) {
     return challenge;    
 }
 
-// pow_try
 // pow_verify
 int pow_verify(uint8_t *challenge, uint8_t *answer) {
     uint8_t hash[32], d, hash_concat[64], response[32];
@@ -446,9 +446,22 @@ int pow_verify(uint8_t *challenge, uint8_t *answer) {
     make_sha3(hash_concat, response, 32);
     
     // checar se os primeiros bits estão corretos
-
     
 
+}
+
+// pow_try
+int pow_try(uint8_t *challenge, uint8_t *answer) {
+    pow_genrand();
+
+    
+    if(pow_verify(challenge, rand_hash)) {
+        for(int i=0; i < 32; i++)  answer[i] = rand_hash[i];
+        return 1;
+    } else {
+        answer = NULL;
+        return 0;
+    }
 }
 
 
