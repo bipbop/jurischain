@@ -5,7 +5,8 @@
 # Estatísticas
 Para gerar o gráfico de média de tentativas/dificuldade de desafio, faça o seguinte:
 
-```python
+```bash
+make all
 virtualenv .env/
 pip install -r requirements.txt
 python3 genstats.py

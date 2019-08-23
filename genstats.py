@@ -36,7 +36,6 @@ def generate_data():
 
     for seed in result:
         for pair in seed:
-            print(pair)
             results[pair[0]] += pair[1]
 
     for diff in results.keys():
