@@ -28,7 +28,7 @@ typedef struct {
 } sha3_ctx_t;
 
 // global rand num
-uint8_t rand_hash[32];
+//uint8_t rand_hash[32];
 
 // Compression function
 void sha3_keccakf(uint64_t st[25]);
@@ -202,22 +202,23 @@ void *sha3(const void *in, size_t inlen, void *md, int mdlen)
 }
 
 // pow_genrand
-uint8_t *pow_genrand() {
-    sha3(rand_hash, 32, rand_hash, 32);
-    return rand_hash;
-}
+// uint8_t *pow_genrand() {
+//     sha3(rand_hash, 32, rand_hash, 32);
+//     return rand_hash;
+// }
 
 // pow_initrand
-uint8_t *pow_initrand(const char* seed) {
-    sha3(seed, strlen(seed), rand_hash, 32);
-    return rand_hash;
-}
+// uint8_t *pow_initrand(const char* seed) {
+//     sha3(seed, strlen(seed), rand_hash, 32);
+//     return rand_hash;
+// }
 
 // pow_gen
-uint8_t *pow_gen(uint8_t d, uint8_t *challenge) {
-    pow_genrand();
+uint8_t *pow_gen(uint8_t d, uint8_t *challenge, uint8_t *seed) {
+    uint8_t rand_hash[32];
+    sha3(seed, sizeof(seed), rand_hash, 32);
+    memcpy(seed, rand_hash, sizeof(rand_hash));
     
-    // for(int i=0; i < 32; i++)  challenge[i] = rand_hash[i]; // substituir por memcpy
     memcpy(challenge, rand_hash, sizeof(rand_hash));
     challenge[32] = d;
 
@@ -228,11 +229,9 @@ uint8_t *pow_gen(uint8_t d, uint8_t *challenge) {
 int pow_verify(uint8_t challenge[static 33], uint8_t answer[static 32]) {
     uint8_t hash[32], d, hash_concat[64], response[32];
 
-    // for(int i=0; i < 32; i++) hash[i] = hash_concat[i] = challenge[i];
     memcpy(hash, challenge, 32);
     memcpy(hash_concat, challenge, 32);
 
-    // for(int i=32; i < 64; i++) hash_concat[i] = answer[i-32];
     memcpy(&hash_concat[32], answer, 32);
     d = challenge[32];
     
@@ -250,12 +249,12 @@ int pow_verify(uint8_t challenge[static 33], uint8_t answer[static 32]) {
 }
 
 // pow_try
-int pow_try(uint8_t *challenge, uint8_t *answer) {
-    pow_genrand();
-
+int pow_try(uint8_t *challenge, uint8_t *answer, uint8_t *seed) {
+    uint8_t rand_hash[32];
+    sha3(seed, sizeof(seed), rand_hash, 32);
+    memcpy(seed, rand_hash, 32);
     
     if(pow_verify(challenge, rand_hash)) {
-       // for(int i=0; i < 32; i++)  answer[i] = rand_hash[i];
         memcpy(answer, rand_hash, sizeof(rand_hash));
         return 1;
     } else {
