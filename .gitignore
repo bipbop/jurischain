@@ -1,3 +1,6 @@
+sha3
+sha3.*
+
 # Prerequisites
 *.d
 
