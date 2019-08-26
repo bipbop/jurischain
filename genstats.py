@@ -12,7 +12,7 @@ def calculate(seed):
 
     for i in range(1, 23):
         print(f"[*] Seed: {s} [{i}/22]")
-        command = ["./sha3", "aaaaaa", f"{seed}", f"{i}"]
+        command = ["./sha3", f"{seed}", f"{i}"]
     
         res = subprocess.check_output(command).splitlines()
         diff = int(str(res[2]).split(':')[1].strip("'"))
