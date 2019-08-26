@@ -3,7 +3,6 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include <time.h>
 #include <stddef.h>
 #include <stdint.h>
@@ -33,21 +32,13 @@ typedef struct {
 // Compression function
 void sha3_keccakf(uint64_t st[25]);
 
-// OpenSSL - like interfece
+// OpenSSL - like interface
 int sha3_init(sha3_ctx_t *c, int mdlen);    // mdlen = hash output in bytes
 int sha3_update(sha3_ctx_t *c, const void *data, size_t len);
 int sha3_final(void *md, sha3_ctx_t *c);    // digest goes to md
 
 // compute a sha3 hash (md) of given byte length from "in"
 void *sha3(const void *in, size_t inlen, void *md, int mdlen);
-
-// SHAKE128 and SHAKE256 extensible-output functions
-#define shake128_init(c) sha3_init(c, 16)
-#define shake256_init(c) sha3_init(c, 32)
-#define shake_update sha3_update
-
-void shake_xof(sha3_ctx_t *c);
-void shake_out(sha3_ctx_t *c, void *out, size_t len);
 
 void sha3_keccakf(uint64_t st[25])
 {
@@ -201,19 +192,6 @@ void *sha3(const void *in, size_t inlen, void *md, int mdlen)
     return md;
 }
 
-// pow_genrand
-// uint8_t *pow_genrand() {
-//     sha3(rand_hash, 32, rand_hash, 32);
-//     return rand_hash;
-// }
-
-// pow_initrand
-// uint8_t *pow_initrand(const char* seed) {
-//     sha3(seed, strlen(seed), rand_hash, 32);
-//     return rand_hash;
-// }
-
-// pow_gen
 uint8_t *pow_gen(uint8_t d, uint8_t *challenge, uint8_t *seed) {
     uint8_t rand_hash[32];
     sha3(seed, sizeof(seed), rand_hash, 32);
@@ -225,7 +203,6 @@ uint8_t *pow_gen(uint8_t d, uint8_t *challenge, uint8_t *seed) {
     return challenge;    
 }
 
-// pow_verify
 int pow_verify(uint8_t challenge[static 33], uint8_t answer[static 32]) {
     uint8_t hash[32], d, hash_concat[64], response[32];
 
@@ -247,7 +224,6 @@ int pow_verify(uint8_t challenge[static 33], uint8_t answer[static 32]) {
     return valid;
 }
 
-// pow_try
 int pow_try(uint8_t *challenge, uint8_t *answer, uint8_t *seed) {
     uint8_t rand_hash[32];
     sha3(seed, sizeof(seed), rand_hash, 32);
