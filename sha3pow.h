@@ -230,9 +230,8 @@ int pow_verify(uint8_t challenge[static 33], uint8_t answer[static 32]) {
     uint8_t hash[32], d, hash_concat[64], response[32];
 
     memcpy(hash, challenge, 32);
-    memcpy(hash_concat, challenge, 32);
-
-    memcpy(&hash_concat[32], answer, 32);
+    memcpy(&hash_concat[32], challenge, 32);
+    memcpy(hash_concat, answer, 32);
     d = challenge[32];
     
     sha3(hash_concat, 64, response, 32);
