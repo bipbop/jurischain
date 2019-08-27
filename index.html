@@ -7,9 +7,9 @@
   <script>
     document.robotCaptcha = {
       seed: 'TrueRandomValue',
-      difficulty: 15,
+      difficulty: 10,
     };
-    document.addEventListener('robotCaptcha', ({ detail }) => console.debug(detail));
+    document.addEventListener('robotCaptcha', ({ detail }) => console.log(detail));
   </script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="./style.css" rel="stylesheet" type="text/css" />

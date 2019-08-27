@@ -18,7 +18,7 @@ char *completed = "<div class='robot-captcha__marker'><div class='robot-captcha_
 
 EM_JS(void, robotElement, (const char *content, int solved, char *challenge), {
   if (solved) document.dispatchEvent(new CustomEvent('robotCaptcha', {
-    'detail': challenge
+    'detail': UTF8ToString(challenge)
   }));
   var robotCaptchaElement = document.getElementById('robot-captcha');
   if (!robotCaptchaElement) return;
