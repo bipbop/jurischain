@@ -18,12 +18,10 @@ int main(int argc, char **argv) {
         return 0;
     }
 
-  /*
     sha3(argv[1], strlen(argv[1]), challenge, 32);
     printf("[HASH] SHA3-256:\n");
     for(int i=0; i < len; i++) printf("%02X", challenge[i]);
-    printf("\n\n");
-  */
+    printf("\n");
 
     memcpy(rand, argv[1], sizeof(rand));
 
@@ -33,8 +31,8 @@ int main(int argc, char **argv) {
     printf("\nDificuldade: %d\n", challenge[32]);
 
     while (!pow_try(challenge, answer, rand)) {
-        for(int i=0; i < len; i++) printf("%02X", rand[i]);
-        printf("\n");
+//        for(int i=0; i < len; i++) printf("%02X", rand[i]);
+//        printf("\n");
         tentativa++;
     }
     printf("Tentativas: %lli\n", tentativa);
@@ -44,7 +42,7 @@ int main(int argc, char **argv) {
     memcpy(&ans[32], answer, 32);
     sha3(ans, 64, answer, 32);
 
-    printf("\n[ANSWER]:\n");
+    printf("[ANSWER]:\n");
     for(int i=0; i < len; i++) printf("%02X", answer[i]);
     printf("\n");    
 

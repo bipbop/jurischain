@@ -15,8 +15,8 @@ def calculate(seed):
         command = ["./sha3", f"{seed}", f"{i}"]
     
         res = subprocess.check_output(command).splitlines()
-        diff = int(str(res[2]).split(':')[1].strip("'"))
-        tries = int(str(res[3]).split(':')[1].strip("'"))
+        diff = int(str(res[4]).split(':')[1].strip("'"))
+        tries = int(str(res[5]).split(':')[1].strip("'"))
 
         assert diff == i
         result.append((diff, tries))
