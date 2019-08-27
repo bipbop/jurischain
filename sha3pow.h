@@ -2,9 +2,6 @@
 #define H_SHA3POW
 
 #include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-#include <stddef.h>
 #include <stdint.h>
 
 #ifndef KECCAKF_ROUNDS

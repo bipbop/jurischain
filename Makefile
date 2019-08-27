@@ -4,7 +4,7 @@ cli:
 	gcc main.c -o sha3 -Ofast
 
 js: 
-	emcc main.c -o sha3.js -O3
+	emcc browser.c -s WASM=0 -o sha3.js -Oz
 
 clean:
 	rm ./sha3

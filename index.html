@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Exemplo de Captcha PoW</title>
+  <script>
+    document.robotCaptcha = {
+      seed: 'TrueRandomValue',
+      difficulty: 15,
+    };
+    document.addEventListener('robotCaptcha', ({ detail }) => console.debug(detail));
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="./style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+  <div id="robot-captcha"></div>
+  <script src="./sha3.js"></script>
+</body>
+</html>
