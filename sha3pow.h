@@ -198,7 +198,7 @@ void *sha3(const void *in, size_t inlen, void *md, int mdlen)
 
 void pow_gen(pow_ctx_t *challenge, uint8_t d, char *seed, size_t inlen) {
     uint8_t rand_hash[HASH_LEN];
-    bzero(challenge, sizeof(pow_ctx_t));
+    memset(challenge, 0, sizeof(pow_ctx_t));
     sha3(seed, inlen, rand_hash, HASH_LEN);
     memcpy(challenge->seed, rand_hash, sizeof(rand_hash));
     memcpy(challenge->payload, rand_hash, sizeof(rand_hash));

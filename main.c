@@ -11,18 +11,18 @@ static char *defaultSeed = "W235XX";
 int main(int argc, char *argv[]) {
     pow_ctx_t challenge;
 
-    size_t trys = 0; 
+    size_t tries = 0; 
     uint8_t difficulty = argc > 1 ? MAX(atoi(argv[1]), 1) : 1;
-    char * initialSeed = argc > 2 && strlen(argv[2]) ? argv[2] : defaultSeed;
+    char * initialSeed = argc > 2 ? argv[2] : defaultSeed;
 
-    printf("Difficulty: %u Challenge: %s\r\n", difficulty, initialSeed);
+    printf("Difficulty: %u\nChallenge: %s\r\n", difficulty, initialSeed);
 
     pow_gen(&challenge, difficulty, initialSeed, strlen(initialSeed) * sizeof(char));
-    while (!pow_try(&challenge)) trys++;
+    while (!pow_try(&challenge)) tries++;
 
     printf("[RESPONSE] ");
     for (int i=0; i < HASH_LEN; i++) printf("%02X", challenge.seed[i]);
-    printf("\r\nTrys: %lu\r\n", trys);
+    printf("\r\nTries: %lu\r\n", tries);
 
-    return !!pow_verify(&challenge);
+    return !pow_verify(&challenge);
 }
