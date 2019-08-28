@@ -13,6 +13,10 @@
 #define ROTL64(x, y) (((x) << (y)) | ((x) >> (64 - (y))))
 #endif
 
+#ifndef HASH_LEN
+#define HASH_LEN 32
+#endif
+
 #define memcpy __builtin_memcpy
 
 // state context
@@ -24,8 +28,10 @@ typedef struct {
     int pt, rsiz, mdlen;                    // these don't overflow
 } sha3_ctx_t;
 
-// global rand num
-//uint8_t rand_hash[32];
+typedef struct {
+    uint8_t payload[HASH_LEN + 1];
+    uint8_t seed[HASH_LEN];
+} pow_ctx_t;
 
 // Compression function
 void sha3_keccakf(uint64_t st[25]);
@@ -190,26 +196,25 @@ void *sha3(const void *in, size_t inlen, void *md, int mdlen)
     return md;
 }
 
-uint8_t *pow_gen(uint8_t d, uint8_t *challenge, uint8_t *seed, size_t inlen) {
-    uint8_t rand_hash[32];
-    sha3(seed, inlen, rand_hash, 32);
-    memcpy(seed, rand_hash, sizeof(rand_hash));
-    
-    memcpy(challenge, rand_hash, sizeof(rand_hash));
-    challenge[32] = d;
-
-    return challenge;
+void pow_gen(pow_ctx_t *challenge, uint8_t d, char *seed, size_t inlen) {
+    uint8_t rand_hash[HASH_LEN];
+    bzero(challenge, sizeof(pow_ctx_t));
+    sha3(seed, inlen, rand_hash, HASH_LEN);
+    memcpy(challenge->seed, rand_hash, sizeof(rand_hash));
+    memcpy(challenge->payload, rand_hash, sizeof(rand_hash));
+    challenge->payload[HASH_LEN] = d;
 }
 
-int pow_verify(uint8_t challenge[static 33], uint8_t answer[static 32]) {
-    uint8_t hash[32], d, hash_concat[64], response[32];
+int pow_verify(pow_ctx_t *challenge) {
+    uint8_t hash[HASH_LEN], d, hash_concat[HASH_LEN*2], response[HASH_LEN];
 
-    memcpy(hash, challenge, 32);
-    memcpy(&hash_concat[32], challenge, 32);
-    memcpy(hash_concat, answer, 32);
-    d = challenge[32];
+    memcpy(hash, challenge->payload, HASH_LEN);
+    memcpy(&hash_concat[HASH_LEN], challenge->payload, HASH_LEN);
+    memcpy(hash_concat, challenge->seed, HASH_LEN);
+
+    d = challenge->payload[HASH_LEN];
     
-    sha3(hash_concat, 64, response, 32);
+    sha3(hash_concat, HASH_LEN * 2, response, HASH_LEN);
     
     // checar se os primeiros bits estão corretos
     uint64_t mask = 0xFFFFFFFFFFFFFFFF >> (64 - (d % 64));
@@ -222,18 +227,16 @@ int pow_verify(uint8_t challenge[static 33], uint8_t answer[static 32]) {
     return valid;
 }
 
-int pow_try(uint8_t *challenge, uint8_t *answer, uint8_t *seed) {
-    uint8_t rand_hash[32];
-    sha3(seed, 32, rand_hash, 32);
-    memcpy(seed, rand_hash, 32);
-    
-    if(pow_verify(challenge, rand_hash)) {
-        memcpy(answer, rand_hash, sizeof(rand_hash));
+int pow_try(pow_ctx_t *challenge) {
+    uint8_t rand_hash[HASH_LEN] = {0,};
+    sha3(challenge->seed, HASH_LEN, rand_hash, HASH_LEN);
+    memcpy(challenge->seed, rand_hash, HASH_LEN);
+
+    if (pow_verify(challenge)) {
         return 1;
-    } else {
-        answer = NULL;
-        return 0;
     }
+    
+    return 0;
 }
 
 #endif
