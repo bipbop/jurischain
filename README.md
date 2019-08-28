@@ -27,7 +27,7 @@ Pensando nisso criamos uma solução baseada em blockchain que sem o dispêndio 
       difficulty: 10,
     };
     /* gera um evento quando resolvido */
-    document.addEventListener('robotCaptcha', ({ detail }) => console.log(detail));
+    document.addEventListener('robotCaptcha', ({ detail: response }) => console.log(response));
   </script>
   /* Elemento */
   <div id="robot-captcha"></div>
