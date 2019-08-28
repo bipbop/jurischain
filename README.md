@@ -59,7 +59,7 @@ Utilizamos o EMCC (Emscripten Compiler Frontend) para entregar um código veloz 
     /* gera um evento quando resolvido */
     document.addEventListener('robotCaptcha', ({ detail: response }) => console.log(response));
   </script>
-  /* Elemento */
+  <!-- Elemento -->
   <div id="robot-captcha"></div>
   <script src="./sha3.js"></script>
 ```
