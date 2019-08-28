@@ -13,6 +13,10 @@ int main(int argc, char **argv) {
     uint8_t answer[32];
     uint8_t challenge[33];
     uint8_t rand[32];
+    
+    memset(challenge, 0, 33);
+    memset(rand, 0, 32);
+    memset(answer, 0, 32);
 
     if (argc < 3) {
         printf("usage: %s <seed> <difficulty> [--test]", argv[0]);
@@ -25,13 +29,12 @@ int main(int argc, char **argv) {
             return -1;
         }
     } else {
-        sha3(argv[1], strlen(argv[1]), challenge, 32);
+        memcpy(rand, argv[1], strlen(argv[1]));
+        sha3(rand, 32, challenge, 32);
         printf("[HASH] SHA3-256:\n");
         for(int i=0; i < len; i++) printf("%02X", challenge[i]);
         printf("\n");
-
-        memcpy(rand, argv[1], sizeof(rand));
-
+ 
         pow_gen(atoi(argv[2]), challenge, rand);
         printf("[CHALLENGE] SHA3-%lu:\n", len * 8);
         for(int i=0; i < len; i++) printf("%02X", challenge[i]);

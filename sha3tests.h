@@ -4,15 +4,20 @@
 #include <stdint.h>
 #include "sha3pow.h"
 
-const char* g_seed = "123456789";
+
+static char g_seed[10] = "123456789";
 int difficulty = 5;
 
 void test_hash() {
-    uint8_t expected[32] = {135, 205, 8, 77, 25, 14, 67, 111, 20, 115, 34, 185, 14, 115, 132, 246, 168, 224, 103, 108, 153, 210, 30, 245, 25, 234, 113, 142, 81, 212, 95, 156};
-    uint8_t hash[32];
+    uint8_t expected[32] = {70, 3, 140, 239, 92, 79, 189, 83, 68, 182, 34, 219, 245, 215, 252, 89, 122, 172, 51, 22, 231, 4, 251, 77, 199, 94, 85, 207, 116, 3, 200, 76};
+    uint8_t hash[32], seed[32];
 
+    memset(hash, 0, 32);
+    memset(seed, 0, 32);
+    
     printf("Running hash test...");
-    sha3(g_seed, strlen(g_seed), hash, 32);
+    memcpy(seed, g_seed, strlen(g_seed));
+    sha3(seed, 32, hash, 32);
 
     assert(!memcmp(hash, expected, 32));
     printf("success!\n");
@@ -22,9 +27,12 @@ void test_challenge() {
     uint8_t expected[33] = {57, 209, 218, 31, 79, 159, 218, 117, 172, 44, 11, 41, 183, 108, 33, 73, 254, 87, 37, 110, 50, 64, 206, 53, 225, 231, 77, 107, 109, 137, 130, 34, 5}; 
     uint8_t challenge[33], seed[32];
 
+    memset(challenge, 0, 33);
+    memset(seed, 0, 32);
+
     printf("Running challenge test...");
-    memcpy(seed, g_seed, sizeof(seed));
-    sha3(g_seed, strlen(g_seed), challenge, 32);
+    memcpy(seed, g_seed, strlen(g_seed));
+    sha3(seed, 32, challenge, 32);
     pow_gen(difficulty, challenge, seed);
 
     assert(!memcmp(challenge, expected, 33));
@@ -36,9 +44,13 @@ void test_attempts() {
     int tries = 0;
     uint8_t challenge[33], seed[32], answer[32];
 
+    memset(challenge, 0, 33);
+    memset(seed, 0, 32);
+    memset(answer, 0, 32);
+
     printf("Running attempts test...");
-    sha3(g_seed, strlen(g_seed), challenge, 32);
-    memcpy(seed, g_seed, sizeof(seed));
+    memcpy(seed, g_seed, strlen(g_seed));
+    sha3(seed, 32, challenge, 32);
     pow_gen(difficulty, challenge, seed);
     while (!pow_try(challenge, answer, seed)) { tries++; }
 
@@ -51,9 +63,14 @@ void test_answer() {
     int tries = 0;
     uint8_t challenge[33], seed[32], answer[32], result[64];
 
+    memset(challenge, 0, 33);
+    memset(seed, 0, 32);
+    memset(answer, 0, 32);
+    memset(result, 0, 64);
+
     printf("Running answer test...");
-    sha3(g_seed, strlen(g_seed), challenge, 32);
-    memcpy(seed, g_seed, sizeof(seed));
+    memcpy(seed, g_seed, strlen(g_seed));
+    sha3(seed, 32, challenge, 32);
     pow_gen(difficulty, challenge, seed);
     while (!pow_try(challenge, answer, seed)) { tries++; }
     memcpy(result, challenge, 32);
