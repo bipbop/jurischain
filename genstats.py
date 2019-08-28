@@ -46,6 +46,9 @@ def generate_data():
 def generate_graph():
     data = generate_data()
 
+    if not os.path.exists('stats/'):
+        os.makedirs('stats/')
+
     with open('stats/dataset.txt', 'w') as dataset:
         json.dump(data, dataset)
 
