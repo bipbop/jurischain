@@ -61,7 +61,7 @@ Utilizamos o EMCC (Emscripten Compiler Frontend) para entregar um código veloz 
   </script>
   <!-- Elemento -->
   <div id="jurischain-captcha"></div>
-  <script src="./sha3.js"></script>
+  <script src="./jurischain.js"></script>
 ```
 
 ![on-browser](./images/photo.jpg)

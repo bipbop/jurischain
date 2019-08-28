@@ -2,14 +2,14 @@
   "name": "jurischain",
   "version": "1.0.0",
   "description": "Instead of challenging the humans at the terminals, it would be better to challenge the terminals. It is about balancing the load with customers so as not to suffer a DDoS attack. Inspired by blockchain technology.",
-  "main": "dist/sha3-cli.js",
-  "browser": "dist/sha3.js",
+  "main": "dist/jurischain-cli.js",
+  "browser": "dist/jurischain.js",
   "bin": {
-    "sha3-cli": "./sha3-cli"
+    "jurischain-cli": "./jurischain-cli"
   },
   "scripts": {
     "install": "make",
-    "test": "./sha3-cli"
+    "test": "./jurischain-cli"
   },
   "repository": {
     "type": "git",
@@ -18,7 +18,7 @@
   "keywords": [
     "captcha",
     "proof-of-work",
-    "sha3",
+    "jurischain",
     "blockchain"
   ],
   "author": "contato@bipbop.com.br",

@@ -12,21 +12,21 @@ EMCC := emcc
 all: js cli cli-js
 
 cli:
-	$(CC) main.c -o sha3 $(CFLAGS)
+	$(CC) main.c -o jurischain $(CFLAGS)
 
 dist:
 	mkdir -p dist
 
 js: dist
-	$(EMCC) browser.c -o dist/sha3.js -s WASM=0 $(EMCCFLAGS)
+	$(EMCC) browser.c -o dist/jurischain.js -s WASM=0 $(EMCCFLAGS)
 
 cli-js: dist
-	$(EMCC) main.c -o dist/sha3-cli.js $(EMCCFLAGS)
+	$(EMCC) main.c -o dist/jurischain-cli.js $(EMCCFLAGS)
 
 install:
 	cp jurischain.h $(DESTDIR)$(PREFIX)/include/
 
 clean:
-	rm -rf ./sha3
+	rm -rf ./jurischain
 	rm -rf ./dist
 	rm -rf *.gcda

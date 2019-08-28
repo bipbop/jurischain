@@ -31,6 +31,7 @@ EM_JS(void, jurischainElement, (const char *content, int solved, char *challenge
     return;
   var input = document.createElement("input");
   input.type = "hidden";
+  input.name = "jurischain";
   input.value = UTF8ToString(challenge, 32);
 })
 

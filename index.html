@@ -5,17 +5,17 @@
   <meta charset="utf-8">
   <title>Exemplo de Captcha PoW</title>
   <script>
-    document.robotCaptcha = {
+    document.jurischain = {
       seed: 'TrueRandomValue',
       difficulty: 10,
     };
-    document.addEventListener('robotCaptcha', ({ detail }) => console.log(detail));
+    document.addEventListener('jurischain', ({ detail }) => console.log(detail));
   </script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="./style.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-  <div id="robot-captcha"></div>
-  <script src="./dist/sha3.js"></script>
+  <div id="jurischain-captcha"></div>
+  <script src="./dist/jurischain.js"></script>
 </body>
 </html>

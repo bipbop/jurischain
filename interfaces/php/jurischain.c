@@ -11,7 +11,7 @@
 #include "php_jurischain.h"
 #include "zend_exceptions.h"
 
-int res_num;
+int res_num = 0;
 char *LE_JURISCHAIN = "jurischain_res\0";
 
 static void jurischain_res_dtor(zend_resource *rsrc)
@@ -59,7 +59,7 @@ PHP_FUNCTION(jurischain_gen)
 
 PHP_FUNCTION(jurischain_try)
 {
-	zval *challenge;
+	zval *challenge = NULL;
 
 	ZEND_PARSE_PARAMETERS_START(1, 1)
 		Z_PARAM_RESOURCE(challenge)
@@ -70,7 +70,7 @@ PHP_FUNCTION(jurischain_try)
 
 PHP_FUNCTION(jurischain_verify)
 {
-	zval *challenge;
+	zval *challenge = NULL;
 
 	ZEND_PARSE_PARAMETERS_START(1, 1)
 		Z_PARAM_RESOURCE(challenge)
@@ -81,7 +81,7 @@ PHP_FUNCTION(jurischain_verify)
 
 PHP_FUNCTION(jurischain_get)
 {
-	zval *challenge;
+	zval *challenge = NULL;
 
 	ZEND_PARSE_PARAMETERS_START(1, 1)
 		Z_PARAM_RESOURCE(challenge)
@@ -95,9 +95,9 @@ PHP_FUNCTION(jurischain_get)
 
 PHP_FUNCTION(jurischain_set)
 {
-	zval *challenge;
-	char *seed;
-	size_t seed_len;
+	zval *challenge = NULL;
+	char *seed = NULL;
+	size_t seed_len = 0;
 
 	ZEND_PARSE_PARAMETERS_START(2, 2)
 		Z_PARAM_RESOURCE(challenge)
