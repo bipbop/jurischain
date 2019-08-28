@@ -1,8 +1,4 @@
 sha3
-sha3.*
-
-sha3-cli.*
-
 *.gcda
 
 # Prerequisites
