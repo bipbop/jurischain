@@ -8,15 +8,15 @@ from multiprocessing import Pool
 
 def calculate(seed):
     result = []
-    s = f"{seed[:8]}"
+    s = f"{str(seed)}"
 
     for i in range(1, 23):
         print(f"[*] Seed: {s} [{i}/22]")
-        command = ["./sha3", f"{seed}", f"{i}"]
+        command = ["./sha3", f"{i}", f"{seed}"]
     
         res = subprocess.check_output(command).splitlines()
-        diff = int(str(res[4]).split(':')[1].strip("'"))
-        tries = int(str(res[5]).split(':')[1].strip("'"))
+        diff = int(str(res[0]).split(':')[1].strip("'"))
+        tries = int(str(res[3]).split(':')[1].strip("'"))
 
         assert diff == i
         result.append((diff, tries))

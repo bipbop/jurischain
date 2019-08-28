@@ -1,61 +1,28 @@
 #include <stdio.h>
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
-#include <stdint.h>
+#include <sys/param.h>
+
 #include "sha3pow.h"
-#include "sha3tests.h"
 
-int main(int argc, char **argv) {
+static char *defaultSeed = "W235XX";
 
-    size_t len = 32;
-    long long int tentativa = 0;
+int main(int argc, char *argv[]) {
+    pow_ctx_t challenge;
 
-    uint8_t answer[32];
-    uint8_t challenge[33];
-    uint8_t rand[32];
-    
-    memset(challenge, 0, 33);
-    memset(rand, 0, 32);
-    memset(answer, 0, 32);
+    size_t tries = 0; 
+    int i = 0;
+    uint8_t difficulty = argc > 1 ? MAX(atoi(argv[1]), 1) : 1;
+    char * initialSeed = argc > 2 ? argv[2] : defaultSeed;
 
-    if (argc < 3) {
-        printf("usage: %s <seed> <difficulty> [--test]", argv[0]);
-        return -1;
-    } else if (argc == 4) {
-        if (!strcmp(argv[3], "--test")) {
-            run_tests();
-        } else {
-            printf("usage: %s <seed> <difficulty> [--test]", argv[0]);
-            return -1;
-        }
-    } else {
-        memcpy(rand, argv[1], strlen(argv[1]));
-        sha3(rand, 32, challenge, 32);
-        printf("[HASH] SHA3-256:\n");
-        for(int i=0; i < len; i++) printf("%02X", challenge[i]);
-        printf("\n");
- 
-        pow_gen(atoi(argv[2]), challenge, rand, sizeof(rand));
-        printf("[CHALLENGE] SHA3-%lu:\n", len * 8);
-        for(int i=0; i < len; i++) printf("%02X", challenge[i]);
-        printf("\nDificuldade: %d\n", challenge[32]);
+    printf("Difficulty: %u\nChallenge: %s\r\n", difficulty, initialSeed);
 
-        while (!pow_try(challenge, answer, rand)) {
-    //        for(int i=0; i < len; i++) printf("%02X", rand[i]);
-    //        printf("\n");
-            tentativa++;
-        }
-        printf("Tentativas: %lli\n", tentativa);
+    pow_gen(&challenge, difficulty, initialSeed, strlen(initialSeed) * sizeof(char));
+    while (!pow_try(&challenge)) tries++;
 
-        uint8_t ans[64];
-        memcpy(ans, challenge, 32);
-        memcpy(&ans[32], answer, 32);
-        sha3(ans, 64, answer, 32);
-
-        printf("[ANSWER]:\n");
-        for(int i=0; i < len; i++) printf("%02X", answer[i]);
-        printf("\n");    
-
-        return 0;
-    }
+    printf("[RESPONSE] ");
+    for (i=0; i < HASH_LEN; i++) printf("%02X", challenge.seed[i]);
+    printf("\r\nTries: %lu\r\n", tries);
+    return !pow_verify(&challenge);
 }
