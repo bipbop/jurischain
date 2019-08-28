@@ -232,11 +232,7 @@ int pow_try(pow_ctx_t *challenge) {
     sha3(challenge->seed, HASH_LEN, rand_hash, HASH_LEN);
     memcpy(challenge->seed, rand_hash, HASH_LEN);
 
-    if (pow_verify(challenge)) {
-        return 1;
-    }
-    
-    return 0;
+    return pow_verify(challenge);
 }
 
 #endif
