@@ -2,7 +2,7 @@
 #define H_SHA3POW
 
 #include <string.h>
-#include <stdio.h>
+#include <strings.h>
 #include <stdint.h>
 
 #ifndef KECCAKF_ROUNDS
@@ -19,13 +19,13 @@
 
 #define memcpy __builtin_memcpy
 
-// state context
+/* state context */
 typedef struct {
-    union {                                 // state:
-        uint8_t b[200];                     // 8-bit bytes
-        uint64_t q[25];                     // 64-bit words
+    union {                                 /* state */
+        uint8_t b[200];                     /* 8-bit bytes */
+        uint64_t q[25];                     /* 64-bit words */
     } st;
-    int pt, rsiz, mdlen;                    // these don't overflow
+    int pt, rsiz, mdlen;                    /* these don't overflow */
 } sha3_ctx_t;
 
 typedef struct {
@@ -33,20 +33,20 @@ typedef struct {
     uint8_t seed[HASH_LEN];
 } pow_ctx_t;
 
-// Compression function
+/* Compression function */
 void sha3_keccakf(uint64_t st[25]);
 
-// OpenSSL - like interface
-int sha3_init(sha3_ctx_t *c, int mdlen);    // mdlen = hash output in bytes
+/* OpenSSL - like interface */
+int sha3_init(sha3_ctx_t *c, int mdlen);    /*  mdlen = hash output in bytes */
 int sha3_update(sha3_ctx_t *c, const void *data, size_t len);
-int sha3_final(void *md, sha3_ctx_t *c);    // digest goes to md
+int sha3_final(void *md, sha3_ctx_t *c);    /*  digest goes to md */
 
-// compute a sha3 hash (md) of given byte length from "in"
+/* compute a sha3 hash (md) of given byte length from "in" */
 void *sha3(const void *in, size_t inlen, void *md, int mdlen);
 
 void sha3_keccakf(uint64_t st[25])
 {
-    // constants
+    /* constants */
     const uint64_t keccakf_rndc[24] = {
         0x0000000000000001, 0x0000000000008082, 0x800000000000808a,
         0x8000000080008000, 0x000000000000808b, 0x0000000080000001,
@@ -66,14 +66,14 @@ void sha3_keccakf(uint64_t st[25])
         15, 23, 19, 13, 12, 2, 20, 14, 22, 9,  6,  1
     };
 
-    // variables
+    /* variables */
     int i, j, r;
     uint64_t t, bc[5];
 
 #if __BYTE_ORDER__ != __ORDER_LITTLE_ENDIAN__
     uint8_t *v;
 
-    // endianess conversion. this is redundant on little-endian targets
+    /* endianess conversion. this is redundant on little-endian targets */
     for (i = 0; i < 25; i++) {
         v = (uint8_t *) &st[i];
         st[i] = ((uint64_t) v[0])     | (((uint64_t) v[1]) << 8) |
@@ -83,10 +83,10 @@ void sha3_keccakf(uint64_t st[25])
     }
 #endif
 
-    // actual iteration
+    /* actual iteration */
     for (r = 0; r < KECCAKF_ROUNDS; r++) {
 
-        // Theta
+        /*  Theta */
         for (i = 0; i < 5; i++)
             bc[i] = st[i] ^ st[i + 5] ^ st[i + 10] ^ st[i + 15] ^ st[i + 20];
 
@@ -96,7 +96,7 @@ void sha3_keccakf(uint64_t st[25])
                 st[j + i] ^= t;
         }
 
-        // Rho Pi
+        /*  Rho Pi */
         t = st[1];
         for (i = 0; i < 24; i++) {
             j = keccakf_piln[i];
@@ -105,7 +105,7 @@ void sha3_keccakf(uint64_t st[25])
             t = bc[0];
         }
 
-        //  Chi
+        /*   Chi */
         for (j = 0; j < 25; j += 5) {
             for (i = 0; i < 5; i++)
                 bc[i] = st[j + i];
@@ -113,13 +113,13 @@ void sha3_keccakf(uint64_t st[25])
                 st[j + i] ^= (~bc[(i + 1) % 5]) & bc[(i + 2) % 5];
         }
 
-        //  Iota
+        /*   Iota */
         st[0] ^= keccakf_rndc[r];
     }
 
 #if __BYTE_ORDER__ != __ORDER_LITTLE_ENDIAN__
 #error WebAssembly should be little endian
-    // endianess conversion. this is redundant on little-endian targets
+    /*  endianess conversion. this is redundant on little-endian targets */
     for (i = 0; i < 25; i++) {
         v = (uint8_t *) &st[i];
         t = st[i];
@@ -135,7 +135,7 @@ void sha3_keccakf(uint64_t st[25])
 #endif
 }
 
-// Initialize the context for SHA3
+/*  Initialize the context for SHA3 */
 int sha3_init(sha3_ctx_t *c, int mdlen)
 {
     int i;
@@ -149,7 +149,7 @@ int sha3_init(sha3_ctx_t *c, int mdlen)
     return 1;
 }
 
-// update state with more data
+/*  update state with more data */
 int sha3_update(sha3_ctx_t *c, const void *data, size_t len)
 {
     size_t i;
@@ -168,7 +168,7 @@ int sha3_update(sha3_ctx_t *c, const void *data, size_t len)
     return 1;
 }
 
-// finalize and output a hash
+/*  finalize and output a hash */
 int sha3_final(void *md, sha3_ctx_t *c)
 {
     int i;
@@ -184,7 +184,7 @@ int sha3_final(void *md, sha3_ctx_t *c)
     return 1;
 }
 
-// compute a SHA-3 hash (md) of given byte length from "in"
+/*  compute a SHA-3 hash (md) of given byte length from "in" */
 void *sha3(const void *in, size_t inlen, void *md, int mdlen)
 {
     sha3_ctx_t sha3;
@@ -206,8 +206,8 @@ void pow_gen(pow_ctx_t *challenge, uint8_t d, char *seed, size_t inlen) {
 }
 
 int pow_verify(pow_ctx_t *challenge) {
-    uint8_t hash[HASH_LEN], d, hash_concat[HASH_LEN*2], response[HASH_LEN];
-
+    uint8_t hash[HASH_LEN] = {0,}, d = 0, hash_concat[HASH_LEN*2] = {0,}, response[HASH_LEN] = {0,};
+    uint64_t mask, *res64, valid, i;
     memcpy(hash, challenge->payload, HASH_LEN);
     memcpy(&hash_concat[HASH_LEN], challenge->payload, HASH_LEN);
     memcpy(hash_concat, challenge->seed, HASH_LEN);
@@ -216,12 +216,12 @@ int pow_verify(pow_ctx_t *challenge) {
     
     sha3(hash_concat, HASH_LEN * 2, response, HASH_LEN);
     
-    // checar se os primeiros bits estão corretos
-    uint64_t mask = 0xFFFFFFFFFFFFFFFF >> (64 - (d % 64));
-    uint64_t* res64 = (uint64_t *) response;  // webassembly assumes little endian
-    int valid = 1;
+    /*  checar se os primeiros bits estão corretos */
+    mask = 0xFFFFFFFFFFFFFFFF >> (64 - (d % 64));
+    res64 = (uint64_t *) response;  /*  webassembly assumes little endian */
+    valid = 1;
 
-    for (int i = 0; i < (d/64); i++) valid = (res64[i] == 0) ? valid : 0;
+    for (i = 0; i < (d/64); i++) valid = (res64[i] == 0) ? valid : 0;
     if ((d % 64) != 0) valid = ((res64[d/64] & mask) == 0) ? valid : 0;
 
     return valid;

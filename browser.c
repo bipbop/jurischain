@@ -5,7 +5,7 @@
 #include "sha3pow.h"
 #include "string.h"
 
-pow_ctx_t pow_i = {0,};
+pow_ctx_t pow_i;
 uint8_t trys = 0;
 size_t len = 32;
 
@@ -26,15 +26,14 @@ EM_JS(void, robotElement, (const char *content, int solved, char *challenge), {
   var input = document.createElement("input");
   input.type = "hidden";
   input.value = UTF8ToString(challenge, 32);
-});
-
+})
 
 EM_JS(void, debug, (uint8_t difficulty, char *seed), {
   console.log('Inicializando RobotCaptcha', {
     "difficulty": difficulty,
     "seed": UTF8ToString(seed),
   });
-});
+})
 
 void EMSCRIPTEN_KEEPALIVE try_solve() {
     for (int i = 0; i < 15; i++) {
