@@ -1,13 +1,19 @@
 all: js cli cli-js
 
+CFLAGS=-Ofast -march=native -frename-registers -fassociative-math -freciprocal-math -fno-signed-zeros -fno-trapping-math
+EMCCFLAGS=-O3 -fassociative-math -freciprocal-math -fno-signed-zeros -fno-trapping-math
+
+CC=gcc
+EMCC=emcc
+
 cli:
-	gcc main.c -o sha3 -Ofast -march=native -frename-registers -fassociative-math -freciprocal-math -fno-signed-zeros -fno-trapping-math
+	$(CC) main.c -o sha3 $(CFLAGS)
 
 js: 
-	emcc browser.c -s WASM=0 -o sha3.js -O3  -frename-registers -fassociative-math -freciprocal-math -fno-signed-zeros -fno-trapping-math
+	$(EMCC) browser.c -o sha3.js -s WASM=0 $(EMCCFLAGS)
 
 cli-js:
-	emcc main.c -o sha3-cli.js -O3  -frename-registers -fassociative-math -freciprocal-math -fno-signed-zeros -fno-trapping-math
+	$(EMCC) main.c -o sha3-cli.js $(EMCCFLAGS)
 
 
 clean:
