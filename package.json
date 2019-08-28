@@ -2,13 +2,14 @@
   "name": "juschain",
   "version": "1.0.0",
   "description": "Instead of challenging the humans at the terminals, it would be better to challenge the terminals. It is about balancing the load with customers so as not to suffer a DDoS attack. Inspired by blockchain technology.",
-  "main": "dist/sha3.js",
+  "main": "dist/sha3-cli.js",
+  "browser": "dist/sha3.js",
   "bin": {
-    "sha3-cli": "dist/sha3-cli"
+    "sha3-cli": "./sha3-cli"
   },
   "scripts": {
     "install": "make",
-    "test": "./dist/sha3-cli"
+    "test": "./sha3-cli"
   },
   "repository": {
     "type": "git",

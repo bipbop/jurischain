@@ -27,6 +27,6 @@ install:
 	cp sha3pow.h $(DESTDIR)$(PREFIX)/include/
 
 clean:
-	rm ./sha3
-	rm ./sha3.*
-	rm main.gcda
+	rm -rf ./sha3
+	rm -rf ./dist
+	rm -rf *.gcda
