@@ -1,5 +1,5 @@
 # JurisChain
-![browser](./browser.png)
+![browser](./images/browser.png)
 
 Em vez de desafiar os humanos nos terminais, seria melhor desafiar os terminais. Trata-se de equilibrar a carga com os clientes para não sofrer um ataque DDoS. Inspirado pela [tecnologia blockchain](https://pt.wikipedia.org/wiki/Prova_de_trabalho).
 
@@ -16,6 +16,8 @@ Pensando nisso criamos uma solução baseada em blockchain que sem o dispêndio 
 > Art. 14. Os sistemas a serem desenvolvidos pelos órgãos do Poder Judiciário deverão usar, preferencialmente, programas com código aberto, acessíveis ininterruptamente por meio da rede mundial de computadores, priorizando-se a sua padronização.
 
 ## Segurança
+
+![keccak](https://keccak.team/assets/img/colors/blue/logo_big.png)
 
 A solução foi desenvolvida sobre o trabalho do [Keccak team](https://keccak.team/), vencedor da competição [NIST (Instituto Nacional de Padrões e Tecnologia dos Estados Unidos)](https://www.nist.gov/), substituindo assim os antecessores SHA-1 e SHA-2. Trata-se de um padrão mundial e foi escolhido justamente pela segurança e conformidade, não beneficiando determinado usuário em detrimento de outro. Desta forma incentivando o consumo justo das plataformas que implementarem a solução.
 
@@ -40,6 +42,8 @@ A solução foi desenvolvida sobre o trabalho do [Keccak team](https://keccak.te
   <script src="./sha3.js"></script>
 ```
 
+![on-browser](./images/photo.jpg)
+
 ### C
 ```c
 void pow_gen(pow_ctx_t *challenge, uint8_t difficulty, const void *seed, size_t inlen);
@@ -58,6 +62,9 @@ int pow_try(pow_ctx_t *challenge)
 ```
 
 ## Estatísticas
+
+![on-browser](./images/multicomplexity.jpg)
+
 Para gerar o gráfico de média de tentativas/dificuldade de desafio, faça o seguinte:
 
 ```bash
