@@ -1,6 +1,25 @@
 # proof-of-work
 
 # API
+
+## Navegador Web
+```html
+  <link href="./style.css" rel="stylesheet" type="text/css" />
+  <script>
+    /* Configuração do Desafio */
+    document.robotCaptcha = {
+      seed: 'TrueRandomValue',
+      difficulty: 10,
+    };
+    /* gera um evento quando resolvido */
+    document.addEventListener('robotCaptcha', ({ detail }) => console.log(detail));
+  </script>
+  /* Elemento */
+  <div id="robot-captcha"></div>
+  <script src="./sha3.js"></script>
+```
+
+## C
 ```c
 void pow_gen(pow_ctx_t *challenge, uint8_t difficulty, const void *seed, size_t inlen);
 
