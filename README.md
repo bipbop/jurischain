@@ -91,6 +91,7 @@ int jurischain_try(jurischain_ctx_t *challenge)
 ```sh
 $ make
 # sudo make install
+# sudo ldconfig
 $ cd interfaces/php
 $ phpize
 $ ./configure
@@ -108,7 +109,7 @@ $difficulty = 10;
 
 $jurischain = jurischain_gen($difficulty, $seed);
 while (!jurischain_try($jurischain));
-var_dump(jurischain_get($jurischain_new));
+var_dump(jurischain_get($jurischain));
 
 $jurischain_new = jurischain_gen($difficulty, $seed);
 jurischain_set($jurischain_new, $_POST["jurischain"]);
