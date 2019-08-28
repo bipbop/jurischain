@@ -4,7 +4,7 @@
 #include <string.h>
 #include <sys/param.h>
 
-#include "sha3pow.h"
+#include "juschain.h"
 
 static char *defaultSeed = "W235XX";
 

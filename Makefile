@@ -24,7 +24,7 @@ cli-js: dist
 	$(EMCC) main.c -o dist/sha3-cli.js $(EMCCFLAGS)
 
 install:
-	cp sha3pow.h $(DESTDIR)$(PREFIX)/include/
+	cp juschain.h $(DESTDIR)$(PREFIX)/include/
 
 clean:
 	rm -rf ./sha3

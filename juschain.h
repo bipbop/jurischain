@@ -3,6 +3,7 @@
 
 #define SHA3POW_VERSION '1.0.0'
 
+#include <stdlib.h>
 #include <stdint.h>
 #include <string.h>
 #include <strings.h>
@@ -18,6 +19,7 @@
 #ifndef HASH_LEN
 #define HASH_LEN 32
 #endif
+  
 
 #define memcpy __builtin_memcpy
 
@@ -176,9 +178,7 @@ int sha3_final(void *md, sha3_ctx_t *c) {
 
 /*  compute a SHA-3 hash (md) of given byte length from "in" */
 void *sha3(const void *in, size_t inlen, void *md, int mdlen) {
-  sha3_ctx_t sha3 = {
-      0,
-  };
+  sha3_ctx_t sha3 = { 0, };
 
   sha3_init(&sha3, mdlen);
   sha3_update(&sha3, in, inlen);
@@ -198,19 +198,22 @@ void pow_gen(pow_ctx_t *challenge, uint8_t d, const void *seed, size_t inlen) {
   challenge->payload[HASH_LEN] = d;
 }
 
+pow_ctx_t *pow_challenge_init() {
+    pow_ctx_t *ptr = NULL;
+    ptr = (pow_ctx_t *)malloc(sizeof(pow_ctx_t));
+    return ptr;
+}
+
+void pow_challenge_destroy(pow_ctx_t **ptr) {
+    free(*ptr);
+    *ptr = NULL;
+}
+
 int pow_verify(pow_ctx_t *challenge) {
-  uint8_t hash[HASH_LEN] =
-      {
-          0,
-      },
+  uint8_t hash[HASH_LEN] = { 0, },
           d = 0,
-          hash_concat[HASH_LEN * 2] =
-              {
-                  0,
-              },
-          response[HASH_LEN] = {
-              0,
-          };
+          hash_concat[HASH_LEN * 2] = { 0, },
+          response[HASH_LEN] = { 0, };
   uint64_t mask = 0, *res64 = NULL, valid = 0, i = 0;
   memcpy(hash, challenge->payload, HASH_LEN);
   memcpy(&hash_concat[HASH_LEN], challenge->payload, HASH_LEN);
@@ -232,9 +235,7 @@ int pow_verify(pow_ctx_t *challenge) {
 }
 
 int pow_try(pow_ctx_t *challenge) {
-  uint8_t rand_hash[HASH_LEN] = {
-      0,
-  };
+  uint8_t rand_hash[HASH_LEN] = { 0, };
   sha3(challenge->seed, HASH_LEN, rand_hash, HASH_LEN);
   memcpy(challenge->seed, rand_hash, HASH_LEN);
 

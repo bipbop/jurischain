@@ -52,15 +52,15 @@ Utilizamos o EMCC (Emscripten Compiler Frontend) para entregar um código veloz 
   <link href="./style.css" rel="stylesheet" type="text/css" />
   <script>
     /* Configuração do Desafio */
-    document.robotCaptcha = {
+    document.juschain = {
       seed: 'TrueRandomValue',
       difficulty: 10,
     };
     /* gera um evento quando resolvido */
-    document.addEventListener('robotCaptcha', ({ detail: response }) => console.log(response));
+    document.addEventListener('juschain', ({ detail: response }) => console.log(response));
   </script>
   <!-- Elemento -->
-  <div id="robot-captcha"></div>
+  <div id="juschain-captcha"></div>
   <script src="./sha3.js"></script>
 ```
 
