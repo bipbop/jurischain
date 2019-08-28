@@ -1,20 +1,25 @@
 # JurisChain
 ![browser](./browser.png)
 
-Em vez de desafiar os humanos nos terminais, seria melhor desafiar os terminais. Trata-se de equilibrar a carga com os clientes para não sofrer um ataque DDoS. Inspirado pela tecnologia blockchain.
+Em vez de desafiar os humanos nos terminais, seria melhor desafiar os terminais. Trata-se de equilibrar a carga com os clientes para não sofrer um ataque DDoS. Inspirado pela [tecnologia blockchain](https://pt.wikipedia.org/wiki/Prova_de_trabalho).
 
 ## Sobre
 
-É sábido que os computadores que servem os tribunais ao grande público tem sofridos diversas vezes com sobrecargas e ataques DDoS (distributed denial of service) que prejudicam a boa prestação da justiça no país, tirando seus portais do ar e atrapalhando magistrados, advogados, bem como as partes de processos.
+É sábido que os computadores que servem os tribunais ao grande público tem sofridos diversas vezes com sobrecargas e ataques [DDoS (distributed denial of service)](https://pt.wikipedia.org/wiki/Ataque_de_nega%C3%A7%C3%A3o_de_servi%C3%A7o) que prejudicam a boa prestação da justiça no país, tirando seus portais do ar e atrapalhando magistrados, advogados, bem como as partes de processos.
 
-Técnicas como firewalls e captchas sofisticados por outro lado não tem sido eficazes no controle do acesso público devido a natural inovação tecnológica da sociedade. Com isso diversas empresas e cidadãos consomem esses dados sem se preocupar com a estabilidade da judicatura seja por imperícia ou desproporcionalidade.
+Técnicas como firewalls e captchas sofisticados por outro lado não tem sido eficazes no controle do acesso público devido a natural inovação tecnológica da sociedade ([1](https://projurisbrasil.jusbrasil.com.br/artigos/189717091/saiba-o-que-sao-os-captchas-e-como-e-possivel-dribla-los-na-hora-de-fazer-um-acompanhamento-processual-mais-rapido-e-eficiente?ref=feed), [2](https://frradvogados.jusbrasil.com.br/artigos/595582536/big-data-e-acesso-a-informacao-a-legalidade-do-uso-de-bots-robos?ref=feed)). Com isso diversas empresas e cidadãos consomem esses dados sem se preocupar com a estabilidade da judicatura seja por imperícia ou desproporcionalidade.
 
-Lembro ainda que soluções como NoCaptcha, de empresas extrangeiras, tem obtidos ganhos monetários com o tempo dos cidadãos, magistrados e advogados para resolver problemas de visão computacional (https://cloud.google.com/vision/, https://www.google.com/recaptcha/intro/v3.html), monitorando os cidadãos para venda de anúcios e fornecendo o problema e a solução em simultâneo para o controle de acesso. Os usuários dos portais jurídicos do país ensinam computadores de empresas estrangeiras e a eles liberamos acesso total e irrestrito aos dados públicos de nosso país.
+Lembro ainda que soluções como NoCaptcha, de empresas extrangeiras, tem obtidos ganhos monetários com o tempo dos cidadãos, magistrados e advogados para resolver problemas de visão computacional (https://cloud.google.com/vision/, https://www.google.com/recaptcha/intro/v3.html), monitorando os cidadãos para venda de anúncios, e fornecendo o problema e a solução em simultâneo para o controle de acesso. Os usuários dos portais jurídicos do país ensinam computadores de empresas estrangeiras e a eles liberamos acesso total e irrestrito aos dados públicos de nosso país.
 
-Pensando nisso criamos uma solução baseada em blockchain que sem o dispêndio de recursos públicos, seja no tempo dos servidores públicos ou gastos com infraestrutura e segurança, as pessoas e empresas possam acessar de forma proporcional os tribunais. A solução visa ser tão simples e mais eficaz que as extrangeiras e totalmente internalizadas, abertas, nos termos do Art. 14 da lei Nº 11.419:
+Pensando nisso criamos uma solução baseada em blockchain que sem o dispêndio de recursos públicos, seja no tempo dos servidores públicos ou gastos com infraestrutura e segurança, as pessoas e empresas possam acessar de forma proporcional os tribunais. A solução visa ser tão simples e mais eficaz que as extrangeiras e totalmente internalizadas, abertas, nos termos do [**Art. 14 da lei Nº 11.419**](http://www.planalto.gov.br/ccivil_03/_Ato2004-2006/2006/Lei/L11419.htm#art14):
 
-''' Art. 14. Os sistemas a serem desenvolvidos pelos órgãos do Poder Judiciário deverão usar, preferencialmente, programas com código aberto, acessíveis ininterruptamente por meio da rede mundial de computadores, priorizando-se a sua padronização. '''.
+> Art. 14. Os sistemas a serem desenvolvidos pelos órgãos do Poder Judiciário deverão usar, preferencialmente, programas com código aberto, acessíveis ininterruptamente por meio da rede mundial de computadores, priorizando-se a sua padronização.
 
+## Segurança
+
+A solução foi desenvolvida sobre o trabalho do [Keccak team](https://keccak.team/), vencedor da competição [NIST (Instituto Nacional de Padrões e Tecnologia dos Estados Unidos)](https://www.nist.gov/), substituindo assim os antecessores SHA-1 e SHA-2. Trata-se de um padrão mundial e foi escolhido justamente pela segurança e conformidade, não beneficiando determinado usuário em detrimento de outro. Desta forma incentivando o consumo justo das plataformas que implementarem a solução.
+
+1. https://csrc.nist.gov/csrc/media/projects/hash-functions/documents/keccak-slides-at-nist.pdf
 
 ## API
 
@@ -28,7 +33,7 @@ Pensando nisso criamos uma solução baseada em blockchain que sem o dispêndio 
       difficulty: 10,
     };
     /* gera um evento quando resolvido */
-    document.addEventListener('robotCaptcha', ({ detail }) => console.log(detail));
+    document.addEventListener('robotCaptcha', ({ detail: response }) => console.log(response));
   </script>
   /* Elemento */
   <div id="robot-captcha"></div>
