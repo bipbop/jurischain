@@ -1,25 +1,41 @@
-# proof-of-work
+# JurisChain
+
+Em vez de desafiar os humanos nos terminais, seria melhor desafiar os terminais. Trata-se de equilibrar a carga com os clientes para não sofrer um ataque DDoS. Inspirado pela tecnologia blockchain.
 
 # API
-```c
-uint8_t* pow_initrand(const char* seed)
 
-- Inicializa a seed de aleatoriedade do programa, não é necessário usar o valor de retorno, porém é importante que seja a primeira função a ser chamada.
+## Navegador Web
+```html
+  <link href="./style.css" rel="stylesheet" type="text/css" />
+  <script>
+    /* Configuração do Desafio */
+    document.robotCaptcha = {
+      seed: 'TrueRandomValue',
+      difficulty: 10,
+    };
+    /* gera um evento quando resolvido */
+    document.addEventListener('robotCaptcha', ({ detail }) => console.log(detail));
+  </script>
+  /* Elemento */
+  <div id="robot-captcha"></div>
+  <script src="./sha3.js"></script>
+```
+
+## C
+```c
+void pow_gen(pow_ctx_t *challenge, uint8_t difficulty, const void *seed, size_t inlen);
+
+- Gera um novo challenge com um grau de complexidade e uma semente.
 ```
 ```c
-uint8_t* pow_gen(uint8_t difficulty, uint8_t* challenge, uint seedSize)
+int pow_verify(pow_ctx_t *challenge)
 
-- Gera um novo challenge e retorna um uint8_t* de 33 bytes onde os 32 primeiros são o desafio e o último a dificuldade.
+- Recebe um ponteiro com challenge e verifica se ela resolve o desafio, retornando 1 no caso de resolver ou 0 no caso de não resolver.
 ```
 ```c
-int pow_verify(uint8_t challenge[33], uint8_t answer[32])
+int pow_try(pow_ctx_t *challenge)
 
-- Recebe um ponteiro com challenge[32] + dificuldade[1] e uma resposta[32] e verifica se ela resolve o desafio, retornando 1 no caso de resolver ou 0 no caso de não resolver.
-```
-```c
-int pow_try(uint8_t* challenge, uint8_t* answer)
-
-- Gera uma tentativa de resposta para o desafio aleatoriamente, retornando 1 caso consiga resolver (com o conteúdo da resposta no buffer <answer>) ou 0 caso não consiga (<answer> = NULL) 
+- Recebe um ponteiro com challenge tenta resolver o desafio, retornando 1 no caso de resolver ou 0 no caso de não resolver.
 ```
 
 # Estatísticas
