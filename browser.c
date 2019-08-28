@@ -55,7 +55,7 @@ int main() {
     debug(difficulty, seed);
     robotElement(loading, 0, NULL);
     memcpy(rand, seed, sizeof(rand));
-    pow_gen(difficulty, challenge, rand);
+    pow_gen(difficulty, challenge, rand, sizeof(rand));
     emscripten_set_main_loop(try_solve, 0, 0);
     return 0;
 }

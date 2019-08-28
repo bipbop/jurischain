@@ -7,7 +7,7 @@ uint8_t* pow_initrand(const char* seed)
 - Inicializa a seed de aleatoriedade do programa, não é necessário usar o valor de retorno, porém é importante que seja a primeira função a ser chamada.
 ```
 ```c
-uint8_t* pow_gen(uint8_t difficulty, uint8_t* challenge)
+uint8_t* pow_gen(uint8_t difficulty, uint8_t* challenge, uint seedSize)
 
 - Gera um novo challenge e retorna um uint8_t* de 33 bytes onde os 32 primeiros são o desafio e o último a dificuldade.
 ```

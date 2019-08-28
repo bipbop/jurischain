@@ -35,7 +35,7 @@ int main(int argc, char **argv) {
         for(int i=0; i < len; i++) printf("%02X", challenge[i]);
         printf("\n");
  
-        pow_gen(atoi(argv[2]), challenge, rand);
+        pow_gen(atoi(argv[2]), challenge, rand, sizeof(rand));
         printf("[CHALLENGE] SHA3-%lu:\n", len * 8);
         for(int i=0; i < len; i++) printf("%02X", challenge[i]);
         printf("\nDificuldade: %d\n", challenge[32]);

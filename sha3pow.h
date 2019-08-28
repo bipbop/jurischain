@@ -1,6 +1,7 @@
 #ifndef H_SHA3POW
 #define H_SHA3POW
 
+#include <string.h>
 #include <stdio.h>
 #include <stdint.h>
 
@@ -189,15 +190,15 @@ void *sha3(const void *in, size_t inlen, void *md, int mdlen)
     return md;
 }
 
-uint8_t *pow_gen(uint8_t d, uint8_t *challenge, uint8_t *seed) {
+uint8_t *pow_gen(uint8_t d, uint8_t *challenge, uint8_t *seed, size_t inlen) {
     uint8_t rand_hash[32];
-    sha3(seed, sizeof(seed), rand_hash, 32);
+    sha3(seed, inlen, rand_hash, 32);
     memcpy(seed, rand_hash, sizeof(rand_hash));
     
     memcpy(challenge, rand_hash, sizeof(rand_hash));
     challenge[32] = d;
 
-    return challenge;    
+    return challenge;
 }
 
 int pow_verify(uint8_t challenge[static 33], uint8_t answer[static 32]) {
@@ -223,7 +224,7 @@ int pow_verify(uint8_t challenge[static 33], uint8_t answer[static 32]) {
 
 int pow_try(uint8_t *challenge, uint8_t *answer, uint8_t *seed) {
     uint8_t rand_hash[32];
-    sha3(seed, sizeof(seed), rand_hash, 32);
+    sha3(seed, 32, rand_hash, 32);
     memcpy(seed, rand_hash, 32);
     
     if(pow_verify(challenge, rand_hash)) {
