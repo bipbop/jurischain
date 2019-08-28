@@ -83,6 +83,39 @@ int jurischain_try(jurischain_ctx_t *challenge)
 - Recebe um ponteiro com challenge tenta resolver o desafio, retornando 1 no caso de resolver ou 0 no caso de não resolver.
 ```
 
+### PHP
+![PHP Logo](./images/new-php-logo.png)
+
+#### Instalação
+
+```sh
+$ make
+# sudo make install
+# sudo ldconfig
+$ cd interfaces/php
+$ phpize
+$ ./configure
+$ make
+$ make test
+# sudo make install
+```
+
+#### Uso
+
+```php
+/** Cria um novo desafio */
+$seed = openssl_random_pseudo_bytes(32);
+$difficulty = 10;
+
+$jurischain = jurischain_gen($difficulty, $seed);
+while (!jurischain_try($jurischain));
+var_dump(jurischain_get($jurischain));
+
+$jurischain_new = jurischain_gen($difficulty, $seed);
+jurischain_set($jurischain_new, $_POST["jurischain"]);
+var_dump(jurischain_verify($jurischain_new));
+```
+
 ## Estatísticas
 
 ![on-browser](./images/multicomplexity.jpg)
