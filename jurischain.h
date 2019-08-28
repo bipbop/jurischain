@@ -35,7 +35,7 @@ typedef struct {
 typedef struct {
   uint8_t payload[HASH_LEN + 1];
   uint8_t seed[HASH_LEN];
-} pow_ctx_t;
+} jurischain_ctx_t;
 
 /* Compression function */
 void sha3_keccakf(uint64_t st[25]);
@@ -187,29 +187,29 @@ void *sha3(const void *in, size_t inlen, void *md, int mdlen) {
   return md;
 }
 
-void pow_gen(pow_ctx_t *challenge, uint8_t d, const void *seed, size_t inlen) {
+void jurischain_gen(jurischain_ctx_t *challenge, uint8_t d, const void *seed, size_t inlen) {
   uint8_t rand_hash[HASH_LEN] = {
       0,
   };
-  memset(challenge, 0, sizeof(pow_ctx_t));
+  memset(challenge, 0, sizeof(jurischain_ctx_t));
   sha3(seed, inlen, rand_hash, HASH_LEN);
   memcpy(challenge->seed, rand_hash, sizeof(rand_hash));
   memcpy(challenge->payload, rand_hash, sizeof(rand_hash));
   challenge->payload[HASH_LEN] = d;
 }
 
-pow_ctx_t *pow_challenge_init() {
-    pow_ctx_t *ptr = NULL;
-    ptr = (pow_ctx_t *)malloc(sizeof(pow_ctx_t));
+jurischain_ctx_t *jurischain_init() {
+    jurischain_ctx_t *ptr = NULL;
+    ptr = (jurischain_ctx_t *)malloc(sizeof(jurischain_ctx_t));
     return ptr;
 }
 
-void pow_challenge_destroy(pow_ctx_t **ptr) {
+void jurischain_destroy(jurischain_ctx_t **ptr) {
     free(*ptr);
     *ptr = NULL;
 }
 
-int pow_verify(pow_ctx_t *challenge) {
+int jurischain_verify(jurischain_ctx_t *challenge) {
   uint8_t hash[HASH_LEN] = { 0, },
           d = 0,
           hash_concat[HASH_LEN * 2] = { 0, },
@@ -234,12 +234,12 @@ int pow_verify(pow_ctx_t *challenge) {
   return valid;
 }
 
-int pow_try(pow_ctx_t *challenge) {
+int jurischain_try(jurischain_ctx_t *challenge) {
   uint8_t rand_hash[HASH_LEN] = { 0, };
   sha3(challenge->seed, HASH_LEN, rand_hash, HASH_LEN);
   memcpy(challenge->seed, rand_hash, HASH_LEN);
 
-  return pow_verify(challenge);
+  return jurischain_verify(challenge);
 }
 
 #endif

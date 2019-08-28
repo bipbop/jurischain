@@ -33,7 +33,7 @@ void test_challenge() {
     printf("Running challenge test...");
     memcpy(seed, g_seed, strlen(g_seed));
     sha3(seed, 32, challenge, 32);
-    pow_gen(difficulty, challenge, seed, sizeof(seed));
+    jurischain_gen(difficulty, challenge, seed, sizeof(seed));
 
     assert(!memcmp(challenge, expected, 33));
     printf("success!\n");
@@ -51,8 +51,8 @@ void test_attempts() {
     printf("Running attempts test...");
     memcpy(seed, g_seed, strlen(g_seed));
     sha3(seed, 32, challenge, 32);
-    pow_gen(difficulty, challenge, seed, sizeof(seed));
-    while (!pow_try(challenge, answer, seed)) { tries++; }
+    jurischain_gen(difficulty, challenge, seed, sizeof(seed));
+    while (!jurischain_try(challenge, answer, seed)) { tries++; }
 
     assert(tries == expected_tries);
     printf("success!\n");
@@ -71,8 +71,8 @@ void test_answer() {
     printf("Running answer test...");
     memcpy(seed, g_seed, strlen(g_seed));
     sha3(seed, 32, challenge, 32);
-    pow_gen(difficulty, challenge, seed, sizeof(seed));
-    while (!pow_try(challenge, answer, seed)) { tries++; }
+    jurischain_gen(difficulty, challenge, seed, sizeof(seed));
+    while (!jurischain_try(challenge, answer, seed)) { tries++; }
     memcpy(result, challenge, 32);
     memcpy(&result[32], answer, 32);
     sha3(result, 64, answer, 32);

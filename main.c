@@ -4,12 +4,12 @@
 #include <string.h>
 #include <sys/param.h>
 
-#include "juschain.h"
+#include "jurischain.h"
 
 static char *defaultSeed = "W235XX";
 
 int main(int argc, char *argv[]) {
-  pow_ctx_t challenge;
+  jurischain_ctx_t challenge;
 
   size_t tries = 0;
   int i = 0;
@@ -18,14 +18,14 @@ int main(int argc, char *argv[]) {
 
   printf("Difficulty: %u\nChallenge: %s\r\n", difficulty, initialSeed);
 
-  pow_gen(&challenge, difficulty, initialSeed,
+  jurischain_gen(&challenge, difficulty, initialSeed,
           strlen(initialSeed) * sizeof(char));
-  while (!pow_try(&challenge))
+  while (!jurischain_try(&challenge))
     tries++;
 
   printf("[RESPONSE] ");
   for (i = 0; i < HASH_LEN; i++)
     printf("%02X", challenge.seed[i]);
   printf("\r\nTries: %lu\r\n", tries);
-  return !pow_verify(&challenge);
+  return !jurischain_verify(&challenge);
 }

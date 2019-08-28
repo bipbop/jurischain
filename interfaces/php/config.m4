@@ -1,9 +1,9 @@
-PHP_ARG_ENABLE(juschain, whether to enable juschain support,
-[  --enable-juschain          Enable juschain support])
+PHP_ARG_ENABLE(jurischain, whether to enable jurischain support,
+[  --enable-jurischain          Enable jurischain support])
 
-if test "$PHP_JUSCHAIN" != "no"; then
-  AC_DEFINE(HAVE_JUSCHAIN, 1, [ Have juschain support ])
-  PHP_NEW_EXTENSION(juschain, juschain.c, $ext_shared)
+if test "$PHP_JURISCHAIN" != "no"; then
+  AC_DEFINE(HAVE_JURISCHAIN, 1, [ Have jurischain support ])
+  PHP_NEW_EXTENSION(jurischain, jurischain.c, $ext_shared)
 fi
 
--ljuschain
+-ljurischain

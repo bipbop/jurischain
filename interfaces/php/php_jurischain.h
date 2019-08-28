@@ -17,19 +17,19 @@
 */
 
 
-#ifndef PHP_JUSCHAIN_H
-# define PHP_JUSCHAIN_H
+#ifndef PHP_JURISCHAIN_H
+# define PHP_JURISCHAIN_H
 
-extern zend_module_entry juschain_module_entry;
-# define phpext_juschain_ptr &juschain_module_entry
+extern zend_module_entry jurischain_module_entry;
+# define phpext_jurischain_ptr &jurischain_module_entry
 
-# define PHP_JUSCHAIN_VERSION "1.0.0"
+# define PHP_JURISCHAIN_VERSION "1.0.0"
 
-# if defined(ZTS) && defined(COMPILE_DL_JUSCHAIN)
+# if defined(ZTS) && defined(COMPILE_DL_JURISCHAIN)
 ZEND_TSRMLS_CACHE_EXTERN()
 # endif
 
-#endif	/* PHP_JUSCHAIN_H */
+#endif	/* PHP_JURISCHAIN_H */
 /*
  * Local variables:
  * tab-width: 4

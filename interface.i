@@ -1,4 +1,4 @@
-%module juschain
+%module jurischain
 
 %module my_module
 

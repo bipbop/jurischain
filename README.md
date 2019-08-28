@@ -52,15 +52,15 @@ Utilizamos o EMCC (Emscripten Compiler Frontend) para entregar um código veloz 
   <link href="./style.css" rel="stylesheet" type="text/css" />
   <script>
     /* Configuração do Desafio */
-    document.juschain = {
+    document.jurischain = {
       seed: 'TrueRandomValue',
       difficulty: 10,
     };
     /* gera um evento quando resolvido */
-    document.addEventListener('juschain', ({ detail: response }) => console.log(response));
+    document.addEventListener('jurischain', ({ detail: response }) => console.log(response));
   </script>
   <!-- Elemento -->
-  <div id="juschain-captcha"></div>
+  <div id="jurischain-captcha"></div>
   <script src="./sha3.js"></script>
 ```
 
@@ -68,17 +68,17 @@ Utilizamos o EMCC (Emscripten Compiler Frontend) para entregar um código veloz 
 
 ### C
 ```c
-void pow_gen(pow_ctx_t *challenge, uint8_t difficulty, const void *seed, size_t inlen);
+void jurischain_gen(jurischain_ctx_t *challenge, uint8_t difficulty, const void *seed, size_t inlen);
 
 - Gera um novo challenge com um grau de complexidade e uma semente.
 ```
 ```c
-int pow_verify(pow_ctx_t *challenge)
+int jurischain_verify(jurischain_ctx_t *challenge)
 
 - Recebe um ponteiro com challenge e verifica se ela resolve o desafio, retornando 1 no caso de resolver ou 0 no caso de não resolver.
 ```
 ```c
-int pow_try(pow_ctx_t *challenge)
+int jurischain_try(jurischain_ctx_t *challenge)
 
 - Recebe um ponteiro com challenge tenta resolver o desafio, retornando 1 no caso de resolver ou 0 no caso de não resolver.
 ```
