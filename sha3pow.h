@@ -1,6 +1,8 @@
 #ifndef H_SHA3POW
 #define H_SHA3POW
 
+#define SHA3POW_VERSION '1.0.0'
+
 #include <string.h>
 #include <strings.h>
 #include <stdint.h>
@@ -196,8 +198,8 @@ void *sha3(const void *in, size_t inlen, void *md, int mdlen)
     return md;
 }
 
-void pow_gen(pow_ctx_t *challenge, uint8_t d, char *seed, size_t inlen) {
-    uint8_t rand_hash[HASH_LEN];
+void pow_gen(pow_ctx_t *challenge, uint8_t d, const void *seed, size_t inlen) {
+    uint8_t rand_hash[HASH_LEN] = {0,};
     memset(challenge, 0, sizeof(pow_ctx_t));
     sha3(seed, inlen, rand_hash, HASH_LEN);
     memcpy(challenge->seed, rand_hash, sizeof(rand_hash));
@@ -207,7 +209,7 @@ void pow_gen(pow_ctx_t *challenge, uint8_t d, char *seed, size_t inlen) {
 
 int pow_verify(pow_ctx_t *challenge) {
     uint8_t hash[HASH_LEN] = {0,}, d = 0, hash_concat[HASH_LEN*2] = {0,}, response[HASH_LEN] = {0,};
-    uint64_t mask, *res64, valid, i;
+    uint64_t mask = 0, *res64 = NULL, valid = 0, i = 0;
     memcpy(hash, challenge->payload, HASH_LEN);
     memcpy(&hash_concat[HASH_LEN], challenge->payload, HASH_LEN);
     memcpy(hash_concat, challenge->seed, HASH_LEN);
