@@ -52,7 +52,7 @@ export const latestSafari: BuilderConfiguration = {
   screenshotHeight: 922,
 }
 
-export async function createBuilder(
+export async function createDriver(
   withCapabilities: {} | Capabilities = {},
   envName?: string,
   { browserName, browserVersion, platformName, screenWidth, screenHeight }: BuilderConfiguration = latestChrome,
