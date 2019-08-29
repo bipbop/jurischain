@@ -43,7 +43,7 @@ A implementação é feita em C (linguagem de programação de baíxo nível), g
 
 ![EMCC](./images/Emscripten_logo_full.png)
 
-Utilizamos o EMCC (Emscripten Compiler Frontend) para entregar um código veloz nos navegadores, fazendo com que estes sejam altamente eficientes nos desafios e a experiência do usuário seja excelente. 
+Utilizamos o EMCC (Emscripten Compiler Frontend) para entregar um código veloz nos navegadores, fazendo com que estes sejam altamente eficientes nos desafios e a experiência do usuário excelente. 
 
 ## API
 
