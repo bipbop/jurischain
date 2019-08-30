@@ -20,19 +20,32 @@ char *completed = "<div class='jurischain-captcha__marker'><div "
                   "com sucesso.</span></div>";
 
 EM_JS(void, jurischainElement, (const char *content, int solved, char *challenge), {
-  if (solved)
-    document.dispatchEvent(
-        new CustomEvent('jurischain', {'detail' : UTF8ToString(challenge)}));
+  if (solved) {
+    var event;
+    var solution = UTF8ToString(challenge, 32);
+    if (typeof CustomEvent === 'function') {
+      event = new CustomEvent('jurischain', {'detail' : solution });
+    } else {
+      event = document.createEvent('CustomEvent');
+      event.initCustomEvent('jurischain', true, false, solution);
+    }
+    document.dispatchEvent(event);
+  }
+
   var jurischainElement = document.getElementById('jurischain-captcha');
-  if (!jurischainElement)
-    return;
-  jurischainElement.innerHTML = UTF8ToString(content);
-  if (!solved)
-    return;
-  var input = document.createElement("input");
-  input.type = "hidden";
-  input.name = "jurischain";
-  input.value = UTF8ToString(challenge, 32);
+  if (jurischainElement) {
+    /* adiciona o conteúdo */
+    jurischainElement.innerHTML = UTF8ToString(content);
+    if (solved) {
+      /* existe o elemento e foi resolvido, logo haverá um input */
+      var input = document.createElement("input");
+      input.type = "hidden";
+      input.name = "jurischain";
+      input.value = solution;
+      jurischainElement.appendChild(input);
+    }
+  }
+
 })
 
 void EMSCRIPTEN_KEEPALIVE try_solve() {
