@@ -18,7 +18,7 @@ dist:
 	mkdir -p dist
 
 js: dist
-	$(EMCC) browser.c -o dist/jurischain.js -s WASM=0 $(EMCCFLAGS)
+	$(EMCC) browser.c -o dist/jurischain.js -s WASM=0 --memory-init-file 0 $(EMCCFLAGS)
 
 cli-js: dist
 	$(EMCC) main.c -o dist/jurischain-cli.js $(EMCCFLAGS)
