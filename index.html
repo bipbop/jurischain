@@ -9,7 +9,7 @@
       seed: 'TrueRandomValue',
       difficulty: 10,
     };
-    document.addEventListener('jurischain', ({ detail }) => console.log(detail));
+    document.addEventListener('jurischain', function(e) { console.log(e.detail) });
   </script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="./style.css" rel="stylesheet" type="text/css" />
