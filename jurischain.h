@@ -1,7 +1,7 @@
-#ifndef H_SHA3POW
-#define H_SHA3POW
+#ifndef H_JURISCHAIN
+#define H_JURISCHAIN
 
-#define SHA3POW_VERSION '1.0.0'
+#define JURISCHAIN_VERSION '1.0.0'
 
 #include <stdlib.h>
 #include <stdint.h>
