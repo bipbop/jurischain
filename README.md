@@ -25,8 +25,6 @@ The solutions have been built over the work of the [Keccak team](https://keccak.
 
 ## Portability- Usabe of Public APIs, Apps, Web Portals and Infrastructure.
 
-## Portabilidade - Uso em APIs Públicas, Aplicativos, Portais e Infraestrutura
-
 ![C Language](./images/c_128x128.png)
 
 The implementation is made in C (a low-level programming language), guaranteeing that all the platforms profit from the technology thanks to its portability. The challenge can be used by public APIs, apps or web portals, avoiding the overload of services.
