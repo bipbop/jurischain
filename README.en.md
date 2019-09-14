@@ -25,7 +25,7 @@ The solutions have been built over the work of the [Keccak team](https://keccak.
 
 ## Portability- Usabe of Public APIs, Apps, Web Portals and Infrastructure.
 
-## Portabilidade - Uso em APIs Públicas, Aplicativos, Portais e Infraestrutura
+## Portabilidade - Uso em APIs PÃºblicas, Aplicativos, Portais e Infraestrutura
 
 ![C Language](./images/c_128x128.png)
 
@@ -35,7 +35,7 @@ The implementation is made in C (a low-level programming language), guaranteeing
 > 
 > The standard I/O library, mathematics routines, and internationalization support are portable across all C implementations. File I/O, signals, and process control are portable across Unixes provided one takes care to use only the modern APIs described in the Single Unix Specification; older C code often has thickets of preprocessor conditionals for portability, but those handle legacy pre-POSIX interfaces from older proprietary Unixes that are obsolete or close to it in 2003.
 > 
-> C portability starts to be a more serious problem near IPC, threads, and GUI interfaces. We discussed IPC and threads portability issues in Chapter 7. The real practical problem is GUI toolkits. A number of open-source GUI toolkits are universally portable across modern Unixes and to Windows and classic MacOS as well — Tk, wxWindows, GTK, and Qt are four well-known ones with source code and documentation readily discoverable by Web search. But none of them is shipped with all platforms, and (for reasons more legal than technical) none of these offers the native-GUI look and feel on all platforms. We gave some guidelines for coping in Chapter 15.
+> C portability starts to be a more serious problem near IPC, threads, and GUI interfaces. We discussed IPC and threads portability issues in Chapter 7. The real practical problem is GUI toolkits. A number of open-source GUI toolkits are universally portable across modern Unixes and to Windows and classic MacOS as well â€” Tk, wxWindows, GTK, and Qt are four well-known ones with source code and documentation readily discoverable by Web search. But none of them is shipped with all platforms, and (for reasons more legal than technical) none of these offers the native-GUI look and feel on all platforms. We gave some guidelines for coping in Chapter 15.
 > 
 > Volumes have been written on the subject of how to write portable C code. This book is not going to be one of them. Instead, we recommend a careful reading of Recommended C Style and Coding Standards [Cannon] and the chapter on portability in The Practice of Programming [Kernighan-Pike99].
 
@@ -87,7 +87,7 @@ int jurischain_try(jurischain_ctx_t *challenge)
 ### PHP
 ![PHP Logo](./images/new-php-logo.png)
 
-#### Instalação
+#### InstalaÃ§Ã£o
 
 ```sh
 $ make
