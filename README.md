@@ -1,7 +1,7 @@
 # JurisChain
 ![browser](./images/browser.png)
 
-Instead of challenging the humans who are working at the terminals, it would be better to challenge the terminals themselves. It's all about balancing out the clients' workload so they won't be a victim of a DDoS attack. Inspired by Blockchain technology.
+Instead of challenging the humans who are working at the terminals, it would be better to challenge the terminals themselves. It's all about balancing out the client's workload so they won't be a victim of a DDoS attack. Inspired by Blockchain technology.
 
 ## About
 
