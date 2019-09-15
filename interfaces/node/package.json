@@ -1,0 +1,31 @@
+{
+  "name": "node-jurischain",
+  "version": "1.0.0",
+  "description": "Instead of challenging the humans who are working at the terminals, it would be better to challenge the terminals themselves. It's all about balancing out the client's workload so they won't be a victim of a DDoS attack. Inspired by Blockchain technology.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile": "node-gyp rebuild"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bipbop/jurischain.git"
+  },
+  "keywords": [
+    "captcha",
+    "proof-of-work",
+    "sha3",
+    "blockchain"
+  ],
+  "author": "tech@bipbop.com.br",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bipbop/jurischain/issues"
+  },
+  "dependencies": {
+    "bindings": "^1.5.0",
+    "nan": "^2.14.0",
+    "node-gyp": "^5.0.3"
+  },
+  "homepage": "https://github.com/bipbop/jurischain#readme"
+}
