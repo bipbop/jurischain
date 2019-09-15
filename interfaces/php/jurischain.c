@@ -12,7 +12,7 @@
 #include "zend_exceptions.h"
 
 int res_num = 0;
-char *LE_JURISCHAIN = "jurischain_res\0";
+char LE_JURISCHAIN[] = "jurischain_res";
 
 static void jurischain_res_dtor(zend_resource *rsrc) {
   jurischain_destroy((jurischain_ctx_t **)&rsrc->ptr);
@@ -137,11 +137,11 @@ ZEND_END_ARG_INFO()
 
 const zend_function_entry jurischain_functions[] = {
     PHP_FE(jurischain_gen, arginfo_jurischain_gen)
-        PHP_FE(jurischain_set, arginfo_jurischain_set)
-            PHP_FE(jurischain_try, arginfo_jurischain_default)
-                PHP_FE(jurischain_get, arginfo_jurischain_default)
-                    PHP_FE(jurischain_verify, arginfo_jurischain_default)
-                        PHP_FE_END};
+    PHP_FE(jurischain_set, arginfo_jurischain_set)
+    PHP_FE(jurischain_try, arginfo_jurischain_default)
+    PHP_FE(jurischain_get, arginfo_jurischain_default)
+    PHP_FE(jurischain_verify, arginfo_jurischain_default)
+PHP_FE_END};
 
 zend_module_entry jurischain_module_entry = {STANDARD_MODULE_HEADER,
                                              "jurischain",

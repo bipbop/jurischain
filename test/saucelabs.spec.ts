@@ -12,6 +12,7 @@ describe('saucelabs tests', function() {
     const driver = await createDriver(undefined, undefined, builderConfiguration)
 
     try {
+      await driver.manage().window().maximize()
       await driver.get(baseUrl)
 
       await driver.wait(async driver => {

@@ -1,33 +1,33 @@
 # JurisChain
 ![browser](./images/browser.png)
 
-Em vez de desafiar os humanos nos terminais, seria melhor desafiar os terminais. Trata-se de equilibrar a carga com os clientes para não sofrer um ataque DDoS. Inspirado pela [tecnologia blockchain](https://pt.wikipedia.org/wiki/Prova_de_trabalho).
+Instead of challenging the humans who are working at the terminals, it would be better to challenge the terminals themselves. It's all about balancing out the client's workload so they won't be a victim of a DDoS attack. Inspired by Blockchain technology.
 
-## Sobre
+## About
 
-É sábido que os computadores que servem os tribunais ao grande público tem sofridos diversas vezes com sobrecargas e ataques [DDoS (distributed denial of service)](https://pt.wikipedia.org/wiki/Ataque_de_nega%C3%A7%C3%A3o_de_servi%C3%A7o) que prejudicam a boa prestação da justiça no país, tirando seus portais do ar e atrapalhando magistrados, advogados, bem como as partes de processos.
+One knows that the computers which serve the publics' courtrooms have suffered from overloads and [DDoS (distributed denial of service) attacks](https://pt.wikipedia.org/wiki/Ataque_de_nega%C3%A7%C3%A3o_de_servi%C3%A7o). Those efforts harm the country's web portal by temporarily shutting it down, bothering the Brazilian judiciary, the lawyers, as well as several different parts of law processes. 
 
-Técnicas como firewalls e captchas sofisticados por outro lado não tem sido eficazes no controle do acesso público devido a natural inovação tecnológica da sociedade ([1](https://projurisbrasil.jusbrasil.com.br/artigos/189717091/saiba-o-que-sao-os-captchas-e-como-e-possivel-dribla-los-na-hora-de-fazer-um-acompanhamento-processual-mais-rapido-e-eficiente?ref=feed), [2](https://frradvogados.jusbrasil.com.br/artigos/595582536/big-data-e-acesso-a-informacao-a-legalidade-do-uso-de-bots-robos?ref=feed)). Com isso diversas empresas e cidadãos consomem esses dados sem se preocupar com a estabilidade da judicatura seja por imperícia ou desproporcionalidade.
+Techniques such as sophisticated firewalls and captchas on the other hand haven't been efficient when it comes to controlling the publics' access, thanks to society's natural process of technological innovation. ([1](https://projurisbrasil.jusbrasil.com.br/artigos/189717091/saiba-o-que-sao-os-captchas-e-como-e-possivel-dribla-los-na-hora-de-fazer-um-acompanhamento-processual-mais-rapido-e-eficiente?ref=feed), [2](https://frradvogados.jusbrasil.com.br/artigos/595582536/big-data-e-acesso-a-informacao-a-legalidade-do-uso-de-bots-robos?ref=feed)) Along with that, several different companies and citizens consume this data without worrying about the stability of the judiciary, be it because of malpractice or disparity.
 
-Lembro ainda que soluções como NoCaptcha, de empresas do exterior, tem obtidos ganhos monetários com o tempo dos cidadãos, magistrados e advogados para resolver problemas de visão computacional (https://cloud.google.com/vision/, https://www.google.com/recaptcha/intro/v3.html), monitorando os usuários para venda de anúncios, e fornecendo o problema e a solução em simultâneo para controle de acesso. Os usuários dos portais jurídicos do país ensinam computadores de empresas estrangeiras e a eles liberamos acesso total e irrestrito as informações públicas de nosso país.
+We remind you, that solutions solutions such as NoCaptcha, from companies abroad, have gotten monetary profit from the citizens', lawyers' and the judiciary's time to solve problems from a computational perspective, monitoring the users with the objects of selling advertisements, and providing the problem and solution simultaneously for access control. The users of the country's judiciary web portal instruct the computers of companies from abroad and to those we let loose total and irrestricted access to public information from our country.  
 
-Pensando nisso criamos uma solução baseada em blockchain que sem o dispêndio de recursos públicos, seja no tempo dos servidores públicos ou gastos com infraestrutura e segurança, as pessoas e empresas possam acessar de forma proporcional os tribunais. A solução visa ser tão simples e mais eficaz que as estrangeiras e totalmente internalizadas, abertas, nos termos do [**Art. 14 da lei Nº 11.419**](http://www.planalto.gov.br/ccivil_03/_Ato2004-2006/2006/Lei/L11419.htm#art14):
+On behalf of this, we've created a Blockchain based solution that without the expense of public resources nor the time of public workers, infrastructure and safety costs so that the people and the companies can access the courtrooms in a proportional way. The solutions aims to be simple and more efficient than international ones by being completed internalised, open, being in [agreement with the article 4 of the law number 11.419](http://www.planalto.gov.br/ccivil_03/_Ato2004-2006/2006/Lei/L11419.htm#art14)
 
-> Art. 14. Os sistemas a serem desenvolvidos pelos órgãos do Poder Judiciário deverão usar, preferencialmente, programas com código aberto, acessíveis ininterruptamente por meio da rede mundial de computadores, priorizando-se a sua padronização.
+> Article 14. The systems to be developed by the public bodies of the judiciary should use, preferably, open source programs, accessible in an uninterruptible manner by the means of a worldwide network of computers, priorizing their standardization. 
 
-## Segurança
+## About
 
 ![keccak](https://keccak.team/assets/img/colors/blue/logo_big.png)
 
-A solução foi desenvolvida sobre o trabalho do [Keccak team](https://keccak.team/), vencedor da competição [NIST (Instituto Nacional de Padrões e Tecnologia dos Estados Unidos)](https://www.nist.gov/), substituindo assim os antecessores SHA-1 e SHA-2. Trata-se de um padrão mundial e foi escolhido justamente pela segurança e conformidade, não beneficiando determinado usuário em detrimento de outro. Desta forma incentivando o consumo justo das plataformas que implementarem a solução.
+The solutions have been built over the work of the [Keccak team](https://keccak.team/), winner of the [NIST (National Institute of Standards and Technology) competition](https://www.nist.gov/), replacing the SHA-1 and SHA-2 predecessors. This is an international standard and has been chosen precisely thanks to its security and conformity, not benefitting one specific user in detriment of the other. Like this, encouraging the usage of fair consumption of the platforms that implement the solution. 
 
 1. https://csrc.nist.gov/csrc/media/projects/hash-functions/documents/keccak-slides-at-nist.pdf
 
-## Portabilidade - Uso em APIs Públicas, Aplicativos, Portais e Infraestrutura
+## Portability- Usabe of Public APIs, Apps, Web Portals and Infrastructure.
 
 ![C Language](./images/c_128x128.png)
 
-A implementação é feita em C (linguagem de programação de baíxo nível), garantindo que todas as plataformas sejam beneficiadas com a tecnologia por causa de sua portabilidade.  O desafio pode tanto ser utilizado em APIs públicas, aplicativos ou portais impedindo sobrecarga dos serviços.
+The implementation is made in C (a low-level programming language), guaranteeing that all the platforms profit from the technology thanks to its portability. The challenge can be used by public APIs, apps or web portals, avoiding the overload of services.
 
 > The core C language is extremely portable. The standard Unix implementation is the GNU C compiler, which is ubiquitous not only in open-source Unixes but modern proprietary Unixes as well. GNU C has been ported to Windows and classic MacOS, but is not widely used in either environment because it lacks portable bindings to the native GUI.
 > 
@@ -39,24 +39,24 @@ A implementação é feita em C (linguagem de programação de baíxo nível), g
 
 [1] http://www.catb.org/~esr/writings/taoup/html/ch17s05.html
 
-### Preparado para Web
+### Prepared for the Web
 
 ![EMCC](./images/Emscripten_logo_full.png)
 
-Utilizamos o EMCC (Emscripten Compiler Frontend) para entregar um código veloz nos navegadores, fazendo com que estes sejam altamente eficientes nos desafios e a experiência do usuário excelente. 
+We use EMCC (Emscripten Compiler Frontend) to deliver a fast code code to the browsers, so that they'll be highly efficient at the challenges that come with the challenge of bringing an excellent user experience.
 
 ## API
 
-### Navegador Web
+### Web Browser
 ```html
   <link href="./style.css" rel="stylesheet" type="text/css" />
   <script>
-    /* Configuração do Desafio */
+    /* Challenge Configuration */
     document.jurischain = {
       seed: 'TrueRandomValue',
       difficulty: 10,
     };
-    /* gera um evento quando resolvido */
+    /* generates an event when solved */
     document.addEventListener('jurischain', ({ detail: response }) => console.log(response));
   </script>
   <!-- Elemento -->
@@ -70,18 +70,17 @@ Utilizamos o EMCC (Emscripten Compiler Frontend) para entregar um código veloz 
 ```c
 void jurischain_gen(jurischain_ctx_t *challenge, uint8_t difficulty, const void *seed, size_t inlen);
 
-- Gera um novo challenge com um grau de complexidade e uma semente.
+- Creates a new challenge with a certain degree of complexity and a seed.
 ```
 ```c
 int jurischain_verify(jurischain_ctx_t *challenge)
 
-- Recebe um ponteiro com challenge e verifica se ela resolve o desafio, retornando 1 no caso de resolver ou 0 no caso de não resolver.
+- Receives a pointer with a challenge and verifies if it can solve the challenge, returning to 1 if it solves it or 0 in case it doesn't.
 ```
 ```c
 int jurischain_try(jurischain_ctx_t *challenge)
 
-- Recebe um ponteiro com challenge tenta resolver o desafio, retornando 1 no caso de resolver ou 0 no caso de não resolver.
-```
+- Receives a pointer with a challenge and tries to solve it, returning 1 in case it does and 0 if it doesn't. 
 
 ### PHP
 ![PHP Logo](./images/new-php-logo.png)
@@ -100,10 +99,10 @@ $ make test
 # sudo make install
 ```
 
-#### Uso
+#### Usage
 
 ```php
-/** Cria um novo desafio */
+/**Creates a new challenge*/
 $seed = openssl_random_pseudo_bytes(32);
 $difficulty = 10;
 
@@ -116,11 +115,11 @@ jurischain_set($jurischain_new, $_POST["jurischain"]);
 var_dump(jurischain_verify($jurischain_new));
 ```
 
-## Estatísticas
+## Statistics
 
 ![on-browser](./images/multicomplexity.jpg)
 
-Para gerar o gráfico de média de tentativas/dificuldade de desafio, faça o seguinte:
+To generate a chart of the number of tries/degree of dificulty of the challenge, do the following: 
 
 ```bash
 make all
@@ -128,4 +127,4 @@ virtualenv .env/
 pip install -r requirements.txt
 python3 genstats.py
 ```
-Os resultados estarão no diretório `stats/`.
+The results will be in the folder `stats/`. 
