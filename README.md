@@ -81,6 +81,17 @@ int jurischain_verify(jurischain_ctx_t *challenge)
 int jurischain_try(jurischain_ctx_t *challenge)
 
 - Receives a pointer with a challenge and tries to solve it, returning 1 in case it does and 0 if it doesn't. 
+```
+### NodeJS
+![Node Logo](https://software.intel.com/sites/default/files/managed/fa/a0/Runtime-logo-Node.jpg)
+```sh
+$ make
+# sudo make install
+# sudo ldconfig
+$ cd interfaces/node
+$ npm install
+```
+
 
 ### PHP
 ![PHP Logo](./images/new-php-logo.png)
