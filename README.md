@@ -23,7 +23,7 @@ The solutions have been built over the work of the [Keccak team](https://keccak.
 
 1. https://csrc.nist.gov/csrc/media/projects/hash-functions/documents/keccak-slides-at-nist.pdf
 
-## Portability- Usabe of Public APIs, Apps, Web Portals and Infrastructure.
+## Portability- Usage of Public APIs, Apps, Web Portals and Infrastructure.
 
 ![C Language](./images/c_128x128.png)
 
