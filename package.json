@@ -1,6 +1,6 @@
 {
   "name": "jurischain",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Instead of challenging the humans at the terminals, it would be better to challenge the terminals. It is about balancing the load with customers so as not to suffer a DDoS attack. Inspired by blockchain technology.",
   "main": "dist/jurischain-cli.js",
   "browser": "dist/jurischain.js",
@@ -29,17 +29,17 @@
   },
   "homepage": "https://github.com/bipbop/jurischain#readme",
   "devDependencies": {
-    "@types/express": "^4.17.1",
+    "@types/express": "^4.17.7",
     "@types/human-interval": "^1.0.0",
-    "@types/jest": "^24.0.18",
-    "@types/node": "^12.7.2",
-    "@types/selenium-webdriver": "^4.0.2",
+    "@types/jest": "^26.0.8",
+    "@types/node": "^14.0.27",
+    "@types/selenium-webdriver": "^4.0.9",
     "express": "^4.17.1",
-    "human-interval": "^0.1.6",
-    "jest": "^24.9.0",
-    "ngrok": "^3.2.5",
-    "selenium-webdriver": "^4.0.0-alpha.4",
-    "ts-jest": "^24.0.2",
-    "typescript": "^3.6.2"
+    "human-interval": "^1.0.0",
+    "jest": "^26.2.2",
+    "ngrok": "^3.2.7",
+    "selenium-webdriver": "^4.0.0-alpha.7",
+    "ts-jest": "^26.1.4",
+    "typescript": "^3.9.7"
   }
 }
