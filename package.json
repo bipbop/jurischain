@@ -2,7 +2,7 @@
   "name": "jurischain",
   "version": "1.0.1",
   "description": "Instead of challenging the humans at the terminals, it would be better to challenge the terminals. It is about balancing the load with customers so as not to suffer a DDoS attack. Inspired by blockchain technology.",
-  "main": "dist/jurischain-cli.js",
+  "main": "dist/jurischain.js",
   "browser": "dist/jurischain.js",
   "bin": {
     "jurischain-cli": "./jurischain-cli"
