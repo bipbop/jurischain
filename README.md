@@ -52,7 +52,7 @@ We use EMCC (Emscripten Compiler Frontend) to deliver a fast code code to the br
   <link href="./style.css" rel="stylesheet" type="text/css" />
   <script>
     /* Challenge Configuration */
-    document.jurischain = {
+    window.jurischain = {
       seed: 'TrueRandomValue',
       difficulty: 10,
     };

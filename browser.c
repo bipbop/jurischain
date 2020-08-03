@@ -65,13 +65,13 @@ void EMSCRIPTEN_KEEPALIVE try_solve() {
 
 int main() {
   if (!emscripten_run_script_int(
-          "!document || !document.jurischain || typeof "
-          "document.jurischain.seed !== 'string' || typeof "
-          "document.jurischain.difficulty !== 'string'"))
+          "!document || !window.jurischain || typeof "
+          "window.jurischain.seed !== 'string' || typeof "
+          "window.jurischain.difficulty !== 'string'"))
     return 1;
-  char *seed = emscripten_run_script_string("document.jurischain.seed");
+  char *seed = emscripten_run_script_string("window.jurischain.seed");
   uint8_t difficulty =
-      emscripten_run_script_int("document.jurischain.difficulty");
+      emscripten_run_script_int("window.jurischain.difficulty");
   jurischainElement(loading, 0, NULL);
   jurischain_gen(&pow_i, difficulty, seed, strlen(seed));
   emscripten_set_main_loop(try_solve, 0, 0);
