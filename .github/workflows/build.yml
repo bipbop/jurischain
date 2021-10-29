@@ -10,7 +10,6 @@ jobs:
     - uses: actions/checkout@v2
     - uses: mymindstorm/setup-emsdk@v9
     - run: make
-    - run: make install
     - uses: actions/setup-node@v2
       with:
         node-version: ${{ matrix.node-version }}
