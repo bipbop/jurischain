@@ -178,7 +178,9 @@ int sha3_final(void *md, sha3_ctx_t *c) {
 
 /*  compute a SHA-3 hash (md) of given byte length from "in" */
 void *sha3(const void *in, size_t inlen, void *md, int mdlen) {
-  sha3_ctx_t sha3 = { 0, };
+  sha3_ctx_t sha3;
+
+  bzero(&sha3, sizeof(sha3));
 
   sha3_init(&sha3, mdlen);
   sha3_update(&sha3, in, inlen);

@@ -1,6 +1,7 @@
-#include <jurischain.h>
-#include <nan.h>
 #include <stdint.h>
+#include <nan.h>
+
+#include "jurischain.h"
 
 class Jurischain : public Nan::ObjectWrap {
 public:
